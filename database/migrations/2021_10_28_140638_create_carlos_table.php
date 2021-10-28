@@ -8,11 +8,6 @@ class CreateCarlosTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * 
-     * asdasdasdasdasdasdsad
-     * 
-     * ddsfsdfdf
      * 
      * @return void
      */
