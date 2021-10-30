@@ -14,6 +14,6 @@ use App\Http\Controllers\EventoController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
-Route::get('/{id_event}', [EventoController::class, 'show']);
+Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
