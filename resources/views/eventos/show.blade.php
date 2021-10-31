@@ -3,14 +3,15 @@
 @section('title', 'EVENTO')
 
 @section('content')
-    <h1>EVENTO: {{ $evento->lugar }}</h1>
-    <li>Ubicacion: {{ $evento->ubicacion }}</li>
-    <li>Direccion: {{ $evento->direccion }}</li>
-    <li>Speach: {{ $evento->speach }}</li>
-    <li>Precio: {{ $evento->precio }}</li>
-    <li>Precio Especial: {{ $evento->precio_esp }}</li>
-    <li>Precio Promocional: {{ $evento->precio_prom }}</li>
-    <li>Imagen: {{ $evento->imagen }}</li>
+
+<h1>EVENTO: {{ $evento->lugar }}</h1>
+<li>Ubicacion: {{ $evento->ubicacion }}</li>
+<li>Direccion: {{ $evento->direccion }}</li>
+<li>Speach: {{ $evento->speach }}</li>
+<li>Precio: {{ $evento->precio }}</li>
+<li>Precio Especial: {{ $evento->precio_esp }}</li>
+<li>Precio Promocional: {{ $evento->precio_prom }}</li>
+<li>Imagen: {{ $evento->imagen }}</li>
 
     <br><br>
     @php
