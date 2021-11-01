@@ -3,41 +3,79 @@
 @section('title', 'EVENTO')
 
 @section('content')
-
-<h1>EVENTO: {{ $evento->lugar }}</h1>
-<li>Ubicacion: {{ $evento->ubicacion }}</li>
-<li>Direccion: {{ $evento->direccion }}</li>
-<li>Speach: {{ $evento->speach }}</li>
-<li>Precio: {{ $evento->precio }}</li>
-<li>Precio Especial: {{ $evento->precio_esp }}</li>
-<li>Precio Promocional: {{ $evento->precio_prom }}</li>
-<li>Imagen: {{ $evento->imagen }}</li>
-
-    <br><br>
     @php
-       $tema=0;
-       $fecha=0;
+    setlocale(LC_TIME, "spanish");	
+    $tema=0;
+    $fecha=0;
     @endphp 
-    @foreach ( $evento->temas_func() as $funcion)
-        @if ($funcion->id != $tema)
-            <h2>
-                {{ $funcion->titulo }}
-                @php
-                    $tema =  $funcion->id;
-                    $fecha=0;
-                @endphp     
-            </h2>
-        @endif
-        @if ($funcion->fecha != $fecha)
-            <h3>
-                {{ $funcion->fecha }}
-                @php
-                    $fecha = $funcion->fecha
-                @endphp
-            </h3>
-        @endif
-        <li>
-            {{ $funcion->horario }} - {{ $funcion->capacidad }} - {{ $funcion->cant_total }}
-        </li>
-    @endforeach
+
+    <div 
+        class="mt-4 rounded enc-evt"
+        style="background-image: url({{ $evento->imagen }}); ">
+        <div class="row p-3 text-white" >
+            <div class="col-md-6 col-lg-4">
+                <h1>{{ $evento->lugar }}</h1>
+                <p>
+                    {{ $evento->speach }}
+                </p>
+                
+                <span class="badge bg-danger" style="font-size:1.1em">Entrada Gral: ${{ $evento->precio }}</span>
+                <span class="badge bg-danger" style="font-size:1.1em">Niños: ${{ $evento->precio_esp }}</span>
+            </div>
+            <div class="col-md-6 col-lg-4 recbco">
+                <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Donde?</h2>
+                <p>{{ $evento->direccion }}</p>   
+                <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Cuando?</h2>
+                @foreach ($evento->fechas() as $fecha)
+                    <p> {{ utf8_encode(strftime("%A %d de %B", strtotime($fecha->fecha))) }}</p>
+                @endforeach
+                <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Duración</h2>
+                <p>{{ $evento->duracion()->minutos }} minutos</p>   
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6567.690907891331!2d-58.39183372246401!3d-34.60806930070792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1635725127059!5m2!1sen!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <h2>Funciones</h2>
+    <div class="row mt-4" >
+        <div>
+        @foreach ( $evento->temas_func() as $funcion)
+
+                @if ($funcion->id != $tema)
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card" style="width:100%">
+                            <img class="card-img-top" src={{ $funcion->imagen }} alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ $funcion->titulo }} </h4>
+                                <p class="card-text">{{ $funcion->descripcion }} </p>
+                            </div>
+                        </div>
+                        @php
+                            $tema =  $funcion->id;
+                            $fecha=0;
+                        @endphp     
+                @endif
+
+                @if ($funcion->fecha != $fecha)
+                    <h3>
+                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }}
+                    </h3>
+                    @php
+                        $fecha = $funcion->fecha
+                    @endphp
+                    
+                @endif
+                
+
+                <li>
+                    {{ $funcion->horario }} - {{ $funcion->capacidad }} - {{ $funcion->cant_total }} 
+                </li>
+  
+
+        @endforeach
+    </div>
 @endsection
