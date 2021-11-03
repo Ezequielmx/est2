@@ -5,5 +5,5 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 
 
-Route::get('', [AdminController::class], 'index');
+//Route::get('/', [AdminController::class], 'index');
 

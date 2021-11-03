@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\Admin\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,13 @@ use App\Http\Controllers\EventoController;
 |
 */
 
-Route::get('/', HomeController::class)->name('home');
-
-Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/', HomeController::class)->name('home');
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
+
