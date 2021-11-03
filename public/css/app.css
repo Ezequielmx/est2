@@ -765,6 +765,7 @@ select {
 [type='file']:focus {
 	outline: 1px auto -webkit-focus-ring-color;
 }
+
 .container {
 	width: 100%;
 	margin-right: auto;
@@ -800,6 +801,7 @@ select {
 		max-width: 1536px;
 	}
 }
+
 .prose {
 	color: #374151;
 	max-width: 65ch;
@@ -1128,9 +1130,11 @@ select {
 .top-0 {
 	top: 0px;
 }
+
 .bottom-0 {
 	bottom: 0px;
 }
+
 .z-0 {
 	z-index: 0;
 }
@@ -1216,9 +1220,11 @@ select {
 .-mt-px {
 	margin-top: -1px;
 }
+
 .mb-2 {
 	margin-bottom: 0.5rem;
 }
+
 .block {
 	display: block;
 }
@@ -1261,9 +1267,11 @@ select {
 .h-20 {
 	height: 5rem;
 }
+
 .h-64 {
 	height: 16rem;
 }
+
 .min-h-screen {
 	min-height: 100vh;
 }
@@ -1324,9 +1332,11 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
+
 .max-w-sm {
 	max-width: 24rem;
 }
+
 .flex-1 {
 	flex: 1 1 0%;
 }
@@ -1483,9 +1493,11 @@ select {
 .border-b {
 	border-bottom-width: 1px;
 }
+
 .border-r {
 	border-right-width: 1px;
 }
+
 .border-gray-300 {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -1505,6 +1517,7 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(243, 244, 246, var(--tw-border-opacity));
 }
+
 .border-red-400 {
 	--tw-border-opacity: 1;
 	border-color: rgba(248, 113, 113, var(--tw-border-opacity));
@@ -1513,6 +1526,7 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(156, 163, 175, var(--tw-border-opacity));
 }
+
 .bg-white {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1573,9 +1587,11 @@ select {
 .bg-no-repeat {
 	background-repeat: no-repeat;
 }
+
 .fill-current {
 	fill: currentColor;
 }
+
 .object-cover {
 	-o-object-fit: cover;
 	   object-fit: cover;
@@ -1720,9 +1736,10 @@ select {
 .font-semibold {
 	font-weight: 600;
 }
+
 .font-bold {
 	font-weight: 700;
-}
+
 .uppercase {
 	text-transform: uppercase;
 }
@@ -1741,9 +1758,10 @@ select {
 .tracking-widest {
 	letter-spacing: 0.1em;
 }
+
 .tracking-wider {
 	letter-spacing: 0.05em;
-}
+
 .text-gray-500 {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -1804,10 +1822,11 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
+
 .text-red-700 {
 	--tw-text-opacity: 1;
 	color: rgba(185, 28, 28, var(--tw-text-opacity));
-}
+
 .text-gray-200 {
 	--tw-text-opacity: 1;
 	color: rgba(229, 231, 235, var(--tw-text-opacity));
@@ -2129,6 +2148,7 @@ select {
 	.sm\:block {
 		display: block;
 	}
+
 
 	.sm\:inline {
 		display: inline;

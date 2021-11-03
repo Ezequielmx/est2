@@ -13,7 +13,7 @@ module.exports = {
         container: {
             center: true,
         },
-        
+      
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
