@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "2ad6770638b5081f3068f45d3c88e143",
+    "content-hash": "3e6e3943d0c133f9001698e7617cc851",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1238,7 +1237,6 @@
             "time": "2020-06-13T08:05:20+00:00"
         },
         {
-
             "name": "jeroennoten/laravel-adminlte",
             "version": "v3.7.1",
             "source": {
@@ -1298,7 +1296,6 @@
             "time": "2021-10-19T14:09:09+00:00"
         },
         {
-
             "name": "laravel/fortify",
             "version": "v1.8.2",
             "source": {
@@ -2132,78 +2129,6 @@
                 }
             ],
             "time": "2021-09-25T08:23:19+00:00"
-        },
-        {
-            "name": "livewire/livewire",
-            "version": "v2.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire/livewire.git",
-                "reference": "991e5bd8a48e450d23cd55336964f916e92a6464"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/991e5bd8a48e450d23cd55336964f916e92a6464",
-                "reference": "991e5bd8a48e450d23cd55336964f916e92a6464",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^7.0|^8.0",
-                "illuminate/support": "^7.0|^8.0",
-                "illuminate/validation": "^7.0|^8.0",
-                "php": "^7.2.5|^8.0",
-                "symfony/http-kernel": "^5.0"
-            },
-            "require-dev": {
-                "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^7.0|^8.0",
-                "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "^5.0|^6.0",
-                "orchestra/testbench-dusk": "^5.2|^6.0",
-                "phpunit/phpunit": "^8.4|^9.0",
-                "psy/psysh": "@stable"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Livewire\\LivewireServiceProvider"
-                    ],
-                    "aliases": {
-                        "Livewire": "Livewire\\Livewire"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Livewire\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Caleb Porzio",
-                    "email": "calebporzio@gmail.com"
-                }
-            ],
-            "description": "A front-end framework for Laravel.",
-            "support": {
-                "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.7.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/calebporzio",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-10-20T02:27:35+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
