@@ -12,8 +12,7 @@
         "laravel/framework": "^8.65",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.6",
-
+        "laravel/tinker": "^2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
