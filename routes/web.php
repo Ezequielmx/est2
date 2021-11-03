@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

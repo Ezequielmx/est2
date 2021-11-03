@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "2ad6770638b5081f3068f45d3c88e143",
     "packages": [
         {
@@ -1237,6 +1238,7 @@
             "time": "2020-06-13T08:05:20+00:00"
         },
         {
+
             "name": "jeroennoten/laravel-adminlte",
             "version": "v3.7.1",
             "source": {
@@ -1296,6 +1298,7 @@
             "time": "2021-10-19T14:09:09+00:00"
         },
         {
+
             "name": "laravel/fortify",
             "version": "v1.8.2",
             "source": {
