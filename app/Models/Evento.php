@@ -36,15 +36,25 @@ class Evento extends Model
 
     }
 
-    public function test(){
-        $func_ent = DB::table('funcione_reserva')
-        ->join('reservas', 'reservas.id', '=', 'funcione_reserva.reserva_id')
-        //->select('funcione_reserva.funcione_id', 'cant_adul')
-        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) + SUM(cant_esp)as cant_total'))
-        ->groupBy('funcione_reserva.funcione_id')
+    public function fechas(){
+        $fechas = DB::table('eventos')
+        ->join('funciones', 'eventos.id', '=', 'funciones.evento_id')
+        ->select('fecha')
+        ->where('eventos.id', '=', $this->id)
+        ->orderBy('fecha')
+        ->distinct()
         ->get()
         ;
+        return $fechas;
+    }
 
-        return $func_ent;
+    public function duracion(){
+
+        $duracion = DB::table('configuraciones')
+        ->select('minutos')
+        ->first();
+
+
+        return $duracion;
     }
 }

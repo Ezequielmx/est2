@@ -14,6 +14,16 @@ use App\Http\Controllers\EventoController;
 |
 */
 
+
+
+
+
+Route::get('/welc', function(){return view('welcome');});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
