@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ReservaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +25,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+Route::get('/reserva/{id_event}', [ReservaController::class, 'create'])->name('reserva.create');
+
+Route::post('reservas', [ReservaController::class, 'store'])->name('reserva.store');
 
 Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
 

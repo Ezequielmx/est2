@@ -25,7 +25,7 @@ class Evento extends Model
         $temas_funcs = DB::table('eventos')
             ->join('funciones', 'eventos.id', '=', 'funciones.evento_id')
             ->join('temas', 'funciones.tema_id', '=', 'temas.id')
-            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', 'cant_total')
+            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', 'cant_total', 'funciones.id as func_id')
             ->orderBy('temas.id')->orderBy('fecha')->orderBy('horario')
             ->where('eventos.id', '=', $this->id)
             ->joinSub($func_ent, 'func_ent', function ($join) {
