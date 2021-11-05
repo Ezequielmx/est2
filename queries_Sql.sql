@@ -51,3 +51,4 @@ VALUES
 (NULL, '7', '1', NULL, NULL),
 (NULL, '8', '2', NULL, NULL)
 
+INSERT INTO `generales` (`imagen`, `speach`, `minutos`, `precio`, `precio_esp`, `precio_prom`, `sobreventa`, `created_at`, `updated_at`) VALUES ('img/general.jpg', 'kelfelfkefkwfekñfkñlwklwekñlfkñlwkfñlewkfñlw ekfpoefpowkfp fpkkfpwekpokfpeok eflfdlfdl,dcl, ckrmrpvg}rrkgreokgokgpr, rmrmgkmv   pvmkmvrmmreijvmveropkrp rmroroiem\r\nrfgonrnnerbobneobnb\r\nSegun Gore, el lider debe ser bueno y lindo', '60', '500', '400', '400', '50', NULL, NULL);

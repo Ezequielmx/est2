@@ -1,10 +1,10 @@
-@extends('adminlte::page')
+extends('adminlte::page')
 
-@section('title','Estrella del Plata')
+@section('title','Crear Generales')
 
 @section('content header')
 
-    <h1>Estrella del Plata</h1>
+    <h1>Crear Generales</h1>
 
 @stop
 
