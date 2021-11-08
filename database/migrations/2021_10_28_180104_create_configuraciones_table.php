@@ -18,10 +18,8 @@ class CreateConfiguracionesTable extends Migration
             $table->string('speach');
             $table->integer('minutos',3);
             $table->float('precio');
-            $table->float('precio_esp');
             $table->float('precio_prom');
-            $table->integer('sobreventa');
-            $table->string('password');            
+            $table->integer('sobreventa');        
             $table->timestamps();
         });
     }
