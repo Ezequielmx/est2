@@ -18,7 +18,7 @@ class Evento extends Model
         $func_ent = DB::table('funcione_reserva')
         ->join('reservas', 'reservas.id', '=', 'funcione_reserva.reserva_id')
         //->select('funcione_reserva.funcione_id', 'cant_adul')
-        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) + SUM(cant_esp)as cant_total'))
+        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) as cant_total'))
         ->groupBy('funcione_reserva.funcione_id')
         ;
 

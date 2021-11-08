@@ -20,7 +20,6 @@ class CreateReservasTable extends Migration
             $table->string('codigo_res');
             $table->float('importe');
             $table->integer('cant_adul');
-            $table->integer('cant_esp'); 
             $table->boolean('wppconf');
             $table->boolean('wpprecord');        
             $table->timestamps();
