@@ -21,6 +21,9 @@ class ReservaController extends Controller
     }
 
     public function store(Request $request){
+
+        setlocale(LC_TIME, "spanish");
+
         $evt = Evento::find($request->evento_id);
         
         $reserva = new Reserva();
@@ -52,41 +55,6 @@ class ReservaController extends Controller
             $reserva->funciones()->attach($request->funcion2);
         }
 
-
-        //----------------------------------------------ENVIO WPP --------------------------------------------------
-        $token = 'yb7lq7jpotu31kgq';
-        $instanceId = '361534';
-        $url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
-        $name = $reserva->usuario;
-        $cel = "549". $reserva->telefono;
-        
-        $mens = "*Hola " . $reserva->usuario . "*\n";
-        $mens .= "Esta confirmada tu reserva para el Planetario Móvil \n";
-        $mens .= "CODIGO DE RESERVA: *" . str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
-        $mens .= "Cantidad de Entradas: *". $reserva->cant_adul . "*\n";
-        $mens .= "Importe Total: *$". $reserva->importe . "*\n";
-        
-        $data = [
-            'phone' => $cel, // Receivers phone
-            'body' => $mens, // Message
-            ];
-            $json = json_encode($data); // Encode data to JSON
-            // URL for request POST /message
-
-            // Make a POST request
-            $options = stream_context_create(['http' => [
-                    'method'  => 'POST',
-                    'header'  => 'Content-type: application/json',
-                    'content' => $json
-                ]
-            ]);
-        // Send a request
-        //MANDA WPP - VER TRY-CATCH para Manejar excepcion
-        
-        //$result = file_get_contents($url, false, $options); 
-
-        //---------------------------------------------- FIN ENVIO WPP --------------------------------------------------
-
         //PARA SHEETS
         $func1 = Funcione::find($request->funcion1);
         $tema1 = Tema::find($func1->tema_id);
@@ -109,7 +77,8 @@ class ReservaController extends Controller
             $func2 = Funcione::find($request->funcion2);
             $tema2 = Tema::find($func2->tema_id);
             $data2 = [
-                $evt->id, $evt->lugar, 
+                $evt->id, 
+                $evt->lugar, 
                 $request->funcion1, 
                 $tema2->titulo, 
                 $func2->fecha, 
@@ -132,5 +101,52 @@ class ReservaController extends Controller
         $sheet->saveDataToSheet($values);
 
         
+        //----------------------------------------------ENVIO WPP --------------------------------------------------
+        $token = 'yb7lq7jpotu31kgq';
+        $instanceId = '361534';
+        $url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
+        $name = $reserva->usuario;
+        $cel = "549". $reserva->telefono;
+        
+        $mens = "*Hola " . $reserva->usuario . "*\n";
+        $mens .= "Esta confirmada tu reserva para el Planetario Móvil en *".  $evt->lugar ."* \n";
+        $mens .= "CODIGO DE RESERVA: *" . str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
+        $mens .= "Cantidad de Entradas: *". $reserva->cant_adul . "*\n";
+        $mens .= "----------------\n";
+        if (!is_null($request->funcion2)) {
+            $mens .= "Funciones: \n";
+            $mens .= "* *" . $tema1->titulo . " - " . utf8_encode(strftime("%A %d de %B", strtotime($func1->fecha))). " a las " . strftime("%H:%M", strtotime($func1->horario)) . " hs.*\n";
+            $mens .= "* *" . $tema2->titulo . " - " . utf8_encode(strftime("%A %d de %B", strtotime($func2->fecha))). " a las " . strftime("%H:%M", strtotime($func2->horario)) . " hs.*\n";
+        }
+        else
+        {
+            $mens .= "Funcion: \n";
+            $mens .= "* *" . $tema1->titulo . " - " . utf8_encode(strftime("%A %d de %B", strtotime($func1->fecha))). " a las " . strftime("%H:%M", strtotime($func1->horario)) . " hs.*\n";
+        }
+        $mens .= "----------------\n";
+        $mens .= "Importe Total: *$". $reserva->importe . "*\n";
+        
+        $data = [
+            'phone' => $cel, // Receivers phone
+            'body' => $mens, // Message
+            ];
+            $json = json_encode($data); // Encode data to JSON
+            // URL for request POST /message
+
+            // Make a POST request
+            $options = stream_context_create(['http' => [
+                    'method'  => 'POST',
+                    'header'  => 'Content-type: application/json',
+                    'content' => $json
+                ]
+            ]);
+        // Send a request
+        //MANDA WPP - VER TRY-CATCH para Manejar excepcion
+        
+        $result = file_get_contents($url, false, $options); 
+
+        //---------------------------------------------- FIN ENVIO WPP --------------------------------------------------
+
+
     }
 }
