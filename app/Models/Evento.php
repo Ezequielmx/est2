@@ -50,7 +50,7 @@ class Evento extends Model
 
     public function duracion(){
 
-        $duracion = DB::table('configuraciones')
+        $duracion = DB::table('generales')
         ->select('minutos')
         ->first();
 
