@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConfiguracionesTable extends Migration
+class CreateGeneralesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateConfiguracionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('configuraciones', function (Blueprint $table) {
+        Schema::create('generales', function (Blueprint $table) {
             $table->string('imagen');
-            $table->string('speach');
+            $table->longText('speach');
             $table->integer('minutos',3);
             $table->float('precio');
             $table->float('precio_prom');
-            $table->integer('sobreventa');        
+            $table->integer('sobreventa');            
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateConfiguracionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('configuraciones');
+        Schema::dropIfExists('generales');
     }
 }

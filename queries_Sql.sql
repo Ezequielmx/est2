@@ -59,7 +59,4 @@ VALUES
 (NULL, '7', '1', NULL, NULL),
 (NULL, '8', '2', NULL, NULL)
 
-
-INSERT INTO `configuraciones` 
-(`imagen`, `speach`, `minutos`, `precio`, `precio_prom`, `sobreventa`, `created_at`, `updated_at`) 
-VALUES ('img/gen.jpg', 'Domingo 7 llegamos a Isidro Casanova,en la Plaza Hipolito Yrigoyen. El planetario vuelve con todos los protocolos sanitarios....Localidades SUPER limitadas.\r\nPresentamos en 360° 2 propuestas diferentes(no se superponen)  Viaja para descubrir nuestro maravilloso universo Expedición al pasado para conocer el mundo donde habitaron los imponentes DINOSAURIOS', '35', '500', '400', '30', NULL, NULL);
+INSERT INTO `generales` (`imagen`, `speach`, `minutos`, `precio`, `precio_esp`, `precio_prom`, `sobreventa`, `created_at`, `updated_at`) VALUES ('img/general.jpg', 'kelfelfkefkwfekñfkñlwklwekñlfkñlwkfñlewkfñlw ekfpoefpowkfp fpkkfpwekpokfpeok eflfdlfdl,dcl, ckrmrpvg}rrkgreokgokgpr, rmrmgkmv   pvmkmvrmmreijvmveropkrp rmroroiem\r\nrfgonrnnerbobneobnb\r\nSegun Gore, el lider debe ser bueno y lindo', '60', '500', '400', '400', '50', NULL, NULL);
