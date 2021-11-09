@@ -16,7 +16,7 @@ class CreateTemasTable extends Migration
         Schema::create('temas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('descripcion');
+            $table->longText('descripcion');
             $table->string('imagen');
             $table->string('video');
             $table->integer('duracion');

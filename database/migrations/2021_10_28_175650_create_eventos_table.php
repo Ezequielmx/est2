@@ -18,7 +18,7 @@ class CreateEventosTable extends Migration
             $table->string('lugar',100);
             $table->string('ubicacion');
             $table->string('direccion');
-            $table->string('speach');
+            $table->longText('speach');
             $table->float('precio');
             $table->float('precio_prom');
             $table->string('imagen');
