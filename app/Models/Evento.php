@@ -18,14 +18,14 @@ class Evento extends Model
         $func_ent = DB::table('funcione_reserva')
         ->join('reservas', 'reservas.id', '=', 'funcione_reserva.reserva_id')
         //->select('funcione_reserva.funcione_id', 'cant_adul')
-        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) + SUM(cant_esp)as cant_total'))
+        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) as cant_total'))
         ->groupBy('funcione_reserva.funcione_id')
         ;
 
         $temas_funcs = DB::table('eventos')
             ->join('funciones', 'eventos.id', '=', 'funciones.evento_id')
             ->join('temas', 'funciones.tema_id', '=', 'temas.id')
-            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', 'cant_total')
+            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', 'cant_total', 'funciones.id as func_id')
             ->orderBy('temas.id')->orderBy('fecha')->orderBy('horario')
             ->where('eventos.id', '=', $this->id)
             ->joinSub($func_ent, 'func_ent', function ($join) {

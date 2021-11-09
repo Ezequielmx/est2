@@ -18,7 +18,6 @@ class CreateGeneralesTable extends Migration
             $table->longText('speach');
             $table->integer('minutos',3);
             $table->float('precio');
-            $table->float('precio_esp');
             $table->float('precio_prom');
             $table->integer('sobreventa');            
             $table->timestamps();

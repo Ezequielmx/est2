@@ -767,8 +767,6 @@ select {
 }
 .container {
 	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
 }
 @media (min-width: 640px) {
 
@@ -1230,6 +1228,9 @@ select {
 }
 .mb-4 {
 	margin-bottom: 1rem;
+}
+.mt-0 {
+	margin-top: 0px;
 }
 .-mt-px {
 	margin-top: -1px;
@@ -1833,6 +1834,10 @@ select {
 .text-green-500 {
 	--tw-text-opacity: 1;
 	color: rgba(16, 185, 129, var(--tw-text-opacity));
+}
+.text-red-700 {
+	--tw-text-opacity: 1;
+	color: rgba(185, 28, 28, var(--tw-text-opacity));
 }
 .text-gray-200 {
 	--tw-text-opacity: 1;
