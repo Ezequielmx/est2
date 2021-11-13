@@ -17,7 +17,7 @@ class GoogleSheet
 
     public function __construct()
     {
-        $this->spreadSheetId = "1nx8LnISsCItpSsjGDFSyYiXlifgVI3-G9tSVQuKszvY";
+        $this->spreadSheetId = config( key:'sheetest.google_sheet_id');
 
         $this->client = new Google_Client();
         $this->client->setAuthConfig(storage_path('credenciales_est.json'));
