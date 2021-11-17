@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="css/st.css">
 
+        
+
          <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,6 +29,9 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- sweetalert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans antialiased">
         
@@ -54,5 +59,16 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script>
+            Livewire.on('alert', function(message){
+                Swal.fire({
+                    title: 'Listo!!',
+                    icon: 'success',
+                    html: 
+                        message,
+                })
+            })
+        </script>
     </body>
 </html>

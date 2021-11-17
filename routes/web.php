@@ -32,7 +32,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //Route::get('/', HomeController::class)->name('home');
 
+
+
+
 Route::get('/', ShowEventos::class)->name('home');
+
+Route::get('/test', function () {return view('test');});
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 

@@ -12,8 +12,8 @@
             style="background-image: url({{ $evento->imagen }}); ">
             <div class="row p-3 text-white" >
                 <div class="col-md-6 col-lg-4">
-                    <h1>{{ $evento->lugar }}</h1>
-                    <p>
+                    <h1 class="respneg fgr">{{ $evento->lugar }}</h1>
+                    <p class="respneg">
                         {{ $evento->speach }}
                     </p>
                     
@@ -36,8 +36,7 @@
         </div>
 
         <br>
-            @livewire('reserva-evento', ['evento'=>$evento])
-            {{-- @livewire('reserva-evento', compact('evento'))   --}}      
+            @livewire('reserva-evento', ['evento'=>$evento])  
         <br>
         <h2>Funciones</h2>
         <div class="row mt-4" >
