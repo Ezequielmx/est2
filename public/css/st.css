@@ -37,7 +37,7 @@
 */
 .recbco
 {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     font-weight: 600;
     color: black;
@@ -54,3 +54,17 @@
 .fgr{
     font-weight: 600;
 }
+
+.flexh{
+    display: flex !important;
+    margin-bottom: 15px;
+}
+
+.hor{
+    width: 48%;
+}
+
+.btnres{
+    width: 52%;
+}
+

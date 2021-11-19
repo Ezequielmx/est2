@@ -82,8 +82,12 @@ class SaveResSheet{
         $url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
         $cel = "549". $this->reserva->telefono;
         
+
+        //$mens = "*Hola " . $this->reserva->usuario . "*\n";
+
         $mens = "*Hola " . $this->reserva->usuario . "*\n";
         $mens .= "Esta confirmada tu reserva para el Planetario Móvil en *".  $this->evento->lugar ."* \n";
+        $mens .= "-".  $this->evento->direccion ."- \n";
         $mens .= "CODIGO DE RESERVA: *" . str_pad($this->reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
         $mens .= "Cantidad de Entradas: *". $this->reserva->cant_adul . "*\n";
         $mens .= "----------------\n";
@@ -99,6 +103,12 @@ class SaveResSheet{
         }
         $mens .= "----------------\n";
         $mens .= "Importe Total: *$". $this->reserva->importe . "*\n";
+        $mens .= "----------------\n";
+        $mens .= "*". "¿Cómo y cuándo se retiran las entradas?" . "*\n";
+        $mens .= "Tenés que estar 30 min antes para asegurar tu lugar y abonar la entrada en el lugar del evento\n\n";
+        $mens .= "*Medios de pago? | Solo en efectivo*\n\n";
+        $mens .= "Por favor sino vas al evento, avísanos, así la reserva se la damos a otra persona que si quiera ir!\n\nLa reserva de entradas es *un compromiso de asistencia  al evento*. Pedimos por favor, que no nos fallen. *Gracias!*";
+
         
         $data = [
             'phone' => $cel, // Receivers phone
@@ -117,7 +127,7 @@ class SaveResSheet{
         // Send a request
         //MANDA WPP - VER TRY-CATCH para Manejar excepcion
         
-        $result = file_get_contents($url, false, $options); 
+        file_get_contents($url, false, $options); 
 
     }
 

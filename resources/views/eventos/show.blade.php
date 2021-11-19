@@ -73,20 +73,22 @@
                         $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total)
                     @endphp
 
-                    <li>
-                        {{ $funcion->horario }} - 
-                        @if ($disp == 0)
-                            entradas agotadas     
-                        @else
-                            @if ($disp > $funcion->capacidad)   
-                                {{ $funcion->capacidad }} disponibles                     
-                            @else
-                                {{ $disp }} disponibles      
+
+                    <div class="flexh">
+                        <div class="hor">
+                            <span class="txthor">{{ strftime("%H:%M", strtotime($funcion->horario))}} hs.</span> 
+                            @if ($disp > 0)
+                                {{ min($disp, rand(10,25)) }} disponibles 
                             @endif
-                            @livewire('reserva-evento', ['evento'=>$evento, 'func_id'=>$funcion->func_id])
-                        @endif
-                        <br> 
-                    </li>
+                        </div>
+                        <div class="btnres">
+                            @if ($disp > 0)
+                                @livewire('reserva-evento', ['evento'=>$evento, 'func_id'=>$funcion->func_id])
+                            @else
+                                Entradas agotadas 
+                            @endif
+                        </div>
+                    </div>
             @endforeach
         </div>
     </div>

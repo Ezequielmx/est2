@@ -41,9 +41,9 @@ Route::get('/test', function () {return view('test');});
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-Route::get('/reserva/{id_event}', [ReservaController::class, 'create'])->name('reserva.create');
+/*Route::get('/reserva/{id_event}', [ReservaController::class, 'create'])->name('reserva.create');*/
 
-Route::post('reservas', [ReservaController::class, 'store'])->name('reserva.store');
+/*Route::post('reservas', [ReservaController::class, 'store'])->name('reserva.store');*/
 
 Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
 

@@ -5,11 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Evento;
 use App\Models\Reserva;
-use App\Models\Funcione;
-use App\Models\Tema;
-use App\Services\GoogleSheet;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
+use phpDocumentor\Reflection\Types\This;
 
 class ReservaEvento extends Component
 {
@@ -29,7 +27,7 @@ class ReservaEvento extends Component
     public $maxEntr;
 
     public function mount(Evento $evento, int $func_id = null){
-        $this->maxEntr = 7;
+        $this->maxEntr = 10;
         $this->evento = $evento;
         $this->func_id = $func_id;
         $this->selectedFunc1 = $func_id;
@@ -101,12 +99,16 @@ class ReservaEvento extends Component
 
         $this->emit('alert', $mensaje);
 
+        $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
 
         $resSheet = new SaveResSheet($reserva, $this->evento, $this->selectedFunc1, $this->selectedFunc2);
+       
+        
         $resSheet->save();
+
         $resSheet->wppConf();
 
-        $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
+        
 
         $this->emit('render');
     }

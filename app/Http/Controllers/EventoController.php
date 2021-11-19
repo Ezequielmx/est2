@@ -7,7 +7,7 @@ use App\Models\Generale;
 
 class EventoController extends Controller
 {
-    protected $listeners = ['render'];
+    protected $listeners = ['render'=>'show'];
 
     public function show($evento_id){
         $sobreventa = Generale::First()->value('sobreventa');
