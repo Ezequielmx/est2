@@ -22,15 +22,15 @@
                 <div class="col-md-6 col-lg-4 recbco">
                     <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Donde?</h2>
                     <p>{{ $evento->direccion }}</p>   
-                    <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Cuando?</h2>
+                    <h2 style="color: #990412"><i class="fa fa-calendar"></i>   Cuando?</h2>
                     @foreach ($evento->fechas() as $fecha)
                         <p> {{ utf8_encode(strftime("%A %d de %B", strtotime($fecha->fecha))) }}</p>
                     @endforeach
-                    <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Duración</h2>
+                    <h2 style="color: #990412"><i class="fa fa-clock-o"></i>   Duración</h2>
                     <p>{{ $evento->duracion()->minutos }} minutos</p>   
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6567.690907891331!2d-58.39183372246401!3d-34.60806930070792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1635725127059!5m2!1sen!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBF4E4xSn_YB3mYUTLP54iHedi4Mng4SDA&q={{ $evento->ubicacion }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>

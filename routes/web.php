@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\SheetController;
 use App\Http\Livewire\ShowEvento;
 use App\Http\Livewire\ShowEventos;
+use App\Http\Livewire\TestMap;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/', ShowEventos::class)->name('home');
+
+Route::get('/maps', TestMap::class);
 
 Route::get('/test', function () {return view('test');});
 

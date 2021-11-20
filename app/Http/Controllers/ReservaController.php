@@ -9,15 +9,12 @@ use App\Models\Funcione;
 use App\Models\Tema;
 use App\Services\GoogleSheet;
 
-use function PHPUnit\Framework\isNull;
-
 
 class ReservaController extends Controller
 {
     public function create($evento_id, $func_id = null){
         $evento = Evento::find($evento_id);
         return view('reservas.create', ['evento' => $evento, 'func_id' => $func_id]);
-        //return view('reservas.create', compact('evento'));
     }
 
     public function store(Request $request){

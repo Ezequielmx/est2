@@ -21,10 +21,12 @@
                 <div class="col">
                     <label for="usuario" class="form-label">Tu Nombre:</label>
                     <input type="text" class="form-control" placeholder="Tu nombre" name="usuario" required wire:model="usuario">
+                    <x-jet-input-error for="usuario"/> 
                 </div>
                 <div class="col">
                     <label for="telefono" class="form-label">Celular:</label>
                     <input type="cel" class="form-control" name="telefono" placeholder="Sin 0 y sin 15 Ej: 1160208707" pattern="[0-9]{10}" required wire:model="tel">
+                    <x-jet-input-error for="tel"/> 
                 </div>
             </div>
             <br>

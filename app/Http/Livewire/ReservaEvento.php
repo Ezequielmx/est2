@@ -7,7 +7,6 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
-use phpDocumentor\Reflection\Types\This;
 
 class ReservaEvento extends Component
 {
@@ -25,6 +24,11 @@ class ReservaEvento extends Component
     public $func_id;
     public $sobreventa;
     public $maxEntr;
+
+    protected $rules = [
+        'usuario' => 'required|min:3',
+        'tel' => 'required|digits:10'
+    ];
 
     public function mount(Evento $evento, int $func_id = null){
         $this->maxEntr = 10;
@@ -74,6 +78,8 @@ class ReservaEvento extends Component
 
     public function save()
     {
+        $this->validate();
+
         setlocale(LC_TIME, "spanish");
         
         $reserva = new Reserva();
