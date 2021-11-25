@@ -10,6 +10,8 @@ class Evento extends Model
 {
     use HasFactory;
 
+    protected $fillable= ['lugar', 'ubicacion', 'direccion', 'speach', 'precio', 'precio_prom', 'imagen', 'activo'];
+
     public function funciones(){
         return $this->hasMany('App\Models\Funcione');
     }
@@ -17,7 +19,6 @@ class Evento extends Model
     public function temas_func(){
         $func_ent = DB::table('funcione_reserva')
         ->join('reservas', 'reservas.id', '=', 'funcione_reserva.reserva_id')
-        //->select('funcione_reserva.funcione_id', 'cant_adul')
         ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) as cant_total'))
         ->groupBy('funcione_reserva.funcione_id')
         ;
@@ -25,10 +26,10 @@ class Evento extends Model
         $temas_funcs = DB::table('eventos')
             ->join('funciones', 'eventos.id', '=', 'funciones.evento_id')
             ->join('temas', 'funciones.tema_id', '=', 'temas.id')
-            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', 'cant_total', 'funciones.id as func_id')
+            ->select('temas.id', 'temas.titulo', 'temas.descripcion', 'temas.imagen', 'temas.video', 'temas.duracion', 'fecha', 'horario', 'capacidad', DB::raw('COALESCE(cant_total,0) as cant_total'), 'funciones.id as func_id')
             ->orderBy('temas.id')->orderBy('fecha')->orderBy('horario')
             ->where('eventos.id', '=', $this->id)
-            ->joinSub($func_ent, 'func_ent', function ($join) {
+            ->leftjoinSub($func_ent, 'func_ent', function ($join) {
                 $join->on('funciones.id', '=', 'func_ent.funcione_id');})
             ->get()
             ;

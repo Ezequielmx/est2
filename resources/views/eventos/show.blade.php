@@ -9,7 +9,7 @@
 
         <div 
             class="mt-4 rounded enc-evt"
-            style="background-image: url({{ $evento->imagen }}); ">
+            style="background-image: url(/storage/{{ $evento->imagen }}); ">
             <div class="row p-3 text-white" >
                 <div class="col-md-6 col-lg-4">
                     <h1 class="respneg fgr">{{ $evento->lugar }}</h1>
@@ -23,18 +23,23 @@
                     <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Donde?</h2>
                     <p>{{ $evento->direccion }}</p>   
                     <h2 style="color: #990412"><i class="fa fa-calendar"></i>   Cuando?</h2>
-                    @foreach ($evento->fechas() as $fecha)
-                        <p> {{ utf8_encode(strftime("%A %d de %B", strtotime($fecha->fecha))) }}</p>
-                    @endforeach
+                    @if($evento->fechas()->count() > 0)
+                        @foreach ($evento->fechas() as $fecha)
+                            <p> {{ utf8_encode(strftime("%A %d de %B", strtotime($fecha->fecha))) }}</p>
+                        @endforeach
+                    @else
+                        <p> Próximamente </p>
+                    @endif   
+
                     <h2 style="color: #990412"><i class="fa fa-clock-o"></i>   Duración</h2>
                     <p>{{ $evento->duracion()->minutos }} minutos</p>   
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBF4E4xSn_YB3mYUTLP54iHedi4Mng4SDA&q={{ $evento->ubicacion }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://maps.google.com/maps?q={{ $evento->ubicacion }}&ie=UTF8&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
-
+@if($evento->fechas()->count() > 0)
         <br>
             @livewire('reserva-evento', ['evento'=>$evento])  
         <br>
@@ -47,7 +52,7 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="card" style="width:100%">
-                                <img class="card-img-top" src={{ $funcion->imagen }} alt="Card image" style="width:100%">
+                                <img class="card-img-top" src="storage/{{ $funcion->imagen }}" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ $funcion->titulo }} </h4>
                                     <p class="card-text">{{ $funcion->descripcion }} </p>
@@ -91,6 +96,7 @@
                     </div>
             @endforeach
         </div>
+@endif
     </div>
 
 </x-app-layout>

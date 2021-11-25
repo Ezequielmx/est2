@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Funcione extends Model
 {
     use HasFactory;
+
+    protected $fillable= ['evento_id', 'capacidad', 'horario', 'fecha', 'tema_id'];
     
     public function evento(){
         return $this->belongsTo('App\Models\Evento');
@@ -19,5 +22,17 @@ class Funcione extends Model
 
     public function reservas(){
         return $this->belongsToMany('App\Models\Reserva');
+    }
+
+    public function tot_res(){
+        $tot_res = DB::table('funciones')
+        ->leftjoin('funcione_reserva', 'funcione_reserva.funcione_id', '=', 'funciones.id')
+        ->leftjoin('reservas', 'funcione_reserva.reserva_id', '=', 'reservas.id')
+        ->select(DB::raw('COALESCE(SUM(cant_adul),0) as ent_reserv'))
+        ->where('funciones.id', '=', $this->id)
+        ->groupBy('funciones.id')
+        ->value('ent_reserv');
+
+        return $tot_res;
     }
 }

@@ -2,6 +2,7 @@
 
 @section('title', 'EVENTOS')
 
+@livewireStyles()
 @section('content')
 <div>
     @php
@@ -20,7 +21,7 @@
                   <div class="col-md-6 col-lg-4">
                       <a class="deco-none" href="{{ route('evento.show', $evento->id) }}">
                       <div class="card" style="width:100%">
-                          <img class="card-img-top" src={{ $evento->imagen }} alt="Card image" style="width:100%">
+                          <img class="card-img-top" src="storage/{{ $evento->imagen }}" alt="Card image" style="width:100%">
                           <div class="card-body">
                             <h4 class="card-title">{{ $evento->lugar }}</h4>
                               @foreach ($evento->fechas() as $fecha)

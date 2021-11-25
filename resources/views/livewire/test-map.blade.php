@@ -1,14 +1,14 @@
 <div>
-    <label for="direccion" class="form-label">Direccion:</label>
-    <input type="text" class="form-control" placeholder="direccion" name="direccion" required wire:model.defer="direccion">
+    <label for="ubicacion" class="form-label">Ubicacion:</label>
+    <input type="text" class="form-control" placeholder="ubicacion" name="ubicacion" required wire:model="ubicacion">
 
     <x-jet-danger-button wire:click="render">
         Ver
     </x-jet-secondary-button>
     <iframe
-	  width="450"
-	  height="250"
+	  width="100%"
+	  height="100px"
 	  frameborder="0" style="border:0"
-	  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBF4E4xSn_YB3mYUTLP54iHedi4Mng4SDA&q={{ $direccion }}">
+      src="https://maps.google.com/maps?q={{ $ubicacion }}&ie=UTF8&output=embed">
 	</iframe>
 </div>

@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class TestMap extends Component
 {
-    public $direccion;
+    public $ubicacion;
     
     public function render()
     {

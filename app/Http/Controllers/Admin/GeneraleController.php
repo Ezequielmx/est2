@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Generale;
 
+use Illuminate\Support\Facades\Storage;
+
 class GeneraleController extends Controller
 {
     /**
@@ -15,9 +17,9 @@ class GeneraleController extends Controller
      */
     public function index()
     {
-        $generales = Generale::all();
-
-        return view('admin.generales.index',compact('generales'));
+        $generale = Generale::first();
+        //return route('admin.generales.edit', $generale);
+        return view('admin.generales.edit',compact('generale'));
     }
 
     /**
@@ -70,9 +72,31 @@ class GeneraleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Generale $Generale)
+    public function update(Request $request, Generale $generale)
     {
-        //
+        $request->validate([
+            'speach' => 'required',
+            'minutos' => 'required',
+            'precio' => 'required',
+            'precio_prom' => 'required',
+            'sobreventa' => 'required'
+        ]);
+
+        
+        if ($request->imagen) {
+            $img = Storage::put('generales', $request->file('imagen'));
+            $generale->imagen = $img;
+        }
+        
+        $generale->speach = $request->speach;
+        $generale->minutos = $request->minutos;
+        $generale->precio = $request->precio;
+        $generale->precio_prom = $request->precio_prom;
+        $generale->sobreventa = $request->sobreventa;
+        
+        $generale->save();
+
+        return redirect()->route('admin.generales.index')->with('info', 'Cambios guardados');
     }
 
     /**

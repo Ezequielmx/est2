@@ -84,7 +84,7 @@ class ReservaEvento extends Component
         
         $reserva = new Reserva();
 
-        $reserva->codigo_res="ASD1234";
+        $reserva->codigo_res="123";
         $reserva->importe=$this->entr_gral * $this->precio;
         $reserva->usuario = $this->usuario;
         $reserva->telefono = $this->tel;
@@ -92,6 +92,8 @@ class ReservaEvento extends Component
         $reserva->wppconf = '0';
         $reserva->wpprecord = '0';
 
+        $reserva->save();
+        $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
         $reserva->save();
 
         $reserva->funciones()->attach($this->selectedFunc1);

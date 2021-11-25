@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\ReservaController;
-use App\Http\Controllers\SheetController;
 use App\Http\Livewire\ShowEvento;
 use App\Http\Livewire\ShowEventos;
 use App\Http\Livewire\TestMap;
@@ -24,7 +21,7 @@ use App\Http\Livewire\TestMap;
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
-    return view('admin');
+    return view('admin.index');
 })->name('admin');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -42,7 +39,7 @@ Route::get('/maps', TestMap::class);
 
 Route::get('/test', function () {return view('test');});
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+/*Route::get('/admin', [AdminController::class, 'index'])->name('admin');*/
 
 /*Route::get('/reserva/{id_event}', [ReservaController::class, 'create'])->name('reserva.create');*/
 

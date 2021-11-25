@@ -27,7 +27,7 @@ class ReservaController extends Controller
 
         $precio = 0;
 
-        $reserva->codigo_res="ASD1234";
+        $reserva->codigo_res="123";
 
         if ($request->funcion2 == null) {
             $precio = $evt->precio;
@@ -44,6 +44,8 @@ class ReservaController extends Controller
         $reserva->wppconf = '0';
         $reserva->wpprecord = '0';
 
+        $reserva->save();
+        $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
         $reserva->save();
 
         $reserva->funciones()->attach($request->funcion1);
