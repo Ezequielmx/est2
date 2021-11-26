@@ -10,7 +10,7 @@ class Evento extends Model
 {
     use HasFactory;
 
-    protected $fillable= ['lugar', 'ubicacion', 'direccion', 'speach', 'precio', 'precio_prom', 'imagen', 'activo'];
+    protected $fillable= ['lugar', 'ubicacion', 'direccion', 'speach', 'precio', 'precio_seg','precio_prom', 'imagen', 'activo'];
 
     public function funciones(){
         return $this->hasMany('App\Models\Funcione');
@@ -19,7 +19,7 @@ class Evento extends Model
     public function temas_func(){
         $func_ent = DB::table('funcione_reserva')
         ->join('reservas', 'reservas.id', '=', 'funcione_reserva.reserva_id')
-        ->select('funcione_reserva.funcione_id', DB::raw('SUM(cant_adul) as cant_total'))
+        ->select('funcione_reserva.funcione_id', DB::raw('SUM(COALESCE(cant_adul, 0) + COALESCE(cant_esp,0)) as cant_total'))
         ->groupBy('funcione_reserva.funcione_id')
         ;
 

@@ -14,6 +14,7 @@ class ReservaEvento extends Component
 
     public $open = false;
     public $entr_gral = 1;
+    public $entr_seg = 0;
     public $usuario = null;
     public $tel = null;
     public $selectedFunc1 = null;
@@ -24,6 +25,7 @@ class ReservaEvento extends Component
     public $func_id;
     public $sobreventa;
     public $maxEntr;
+    public $cant_funciones=1;
 
     protected $rules = [
         'usuario' => 'required|min:3',
@@ -41,6 +43,11 @@ class ReservaEvento extends Component
         if (is_null($this->selectedFunc1)) {
             $this->selectedFunc1 = $this->evento->temas_func()->first()->func_id;
         }
+
+        $func1 = $this->evento->temas_func()->where('func_id','=', $this->selectedFunc1)->first();
+        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
+
+        $this->maxEntr = min(10, $disp_func1);
         
     }
 
@@ -51,11 +58,12 @@ class ReservaEvento extends Component
         $func1 = $this->evento->temas_func()->where('func_id','=', $func1_id)->first();
         $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
-        $this->maxEntr = min(7, $disp_func1);
+        $this->maxEntr = min(10, $disp_func1);
         $this->entr_gral = min($this->entr_gral, $this->maxEntr);
 
         $this->selectedFunc2 = null;
         $this->precio = $this->evento->precio;
+        $this->cant_funciones=1;
 
     }
 
@@ -63,6 +71,7 @@ class ReservaEvento extends Component
     {
         if ($func2_id == null) {
             $this->precio = $this->evento->precio;
+            $this->cant_funciones=1;
         }
         else{
             $func2 = $this->evento->temas_func()->where('func_id','=', $func2_id)->first();
@@ -70,8 +79,8 @@ class ReservaEvento extends Component
     
             $this->maxEntr = min($this->maxEntr, $disp_func2);
             $this->entr_gral = min($this->entr_gral, $this->maxEntr);
-            $this->precio = $this->evento->precio_prom*2;
-
+            $this->precio = $this->evento->precio_prom;
+            $this->cant_funciones=2;
         }
     }
 
@@ -89,6 +98,7 @@ class ReservaEvento extends Component
         $reserva->usuario = $this->usuario;
         $reserva->telefono = $this->tel;
         $reserva->cant_adul = $this->entr_gral;
+        $reserva->cant_esp = $this->entr_seg;
         $reserva->wppconf = '0';
         $reserva->wpprecord = '0';
 

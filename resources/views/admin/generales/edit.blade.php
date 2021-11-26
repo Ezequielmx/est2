@@ -34,7 +34,8 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-
+                </div>
+                <div class="col">
                     <div class="form-group">
                         {!! Form::label('sobreventa', 'Sobreventa (porcentaje)') !!}
                         {!! Form::number('sobreventa', null, ['class' => 'form-control', 'placeholder' => 'Seleccione porcentaje de sobreventa']) !!}
@@ -43,10 +44,10 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-
                 </div>
-                <div class="col">
 
+
+                <div class="col">
                     <div class="form-group">
                         {!! Form::label('precio', 'Precio General') !!}
                         {!! Form::number('precio', null, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio General']) !!}
@@ -55,10 +56,21 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-
+                </div>
+                <div class="col">
                     <div class="form-group">
                         {!! Form::label('precio_prom', 'Precio Promocional (2 eventos)') !!}
                         {!! Form::number('precio_prom', null, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
+
+                        @error('precio_prom')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {!! Form::label('precio_seg', 'Precio Seguro (menores)') !!}
+                        {!! Form::number('precio_seg', null, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
 
                         @error('precio_prom')
                             <span class="text-danger">{{ $message }}</span>

@@ -28,6 +28,7 @@
                         <th>Speach</th>
                         <th>Precio</th>
                         <th>Precio Promo</th>
+                        <th>Precio Seguro</th>
                         <th>Activo</th>
                         <th colspan="3"></th>
                     </tr>
@@ -41,6 +42,7 @@
                         <td>{{ $evento->speach }}</td>
                         <td>$ {{ $evento->precio }}</td>
                         <td>$ {{ $evento->precio_prom }}</td>
+                        <td>$ {{ $evento->precio_seg }}</td>
                         <td>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"

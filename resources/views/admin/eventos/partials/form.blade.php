@@ -60,7 +60,7 @@
             <div class="col">
                 <div class="form-group">
                     {!! Form::label('precio_prom', 'Precio Promocional (2 eventos)') !!}
-                    @isset($evento->precio)
+                    @isset($evento->precio_prom)
                         {!! Form::number('precio_prom', $evento->precio_prom, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
                     @else
                         {!! Form::number('precio_prom', $general->precio_prom, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
@@ -68,6 +68,20 @@
 
 
                     @error('precio_prom')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {!! Form::label('precio_seg', 'Precio Seguro (menores)') !!}
+                    @isset($evento->precio_seg)
+                        {!! Form::number('precio_seg', $evento->precio_seg, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
+                    @else
+                        {!! Form::number('precio_seg', $general->precio_seg, ['class' => 'form-control', 'placeholder' => 'Seleccione Precio Promocional']) !!}
+                    @endisset
+
+                    @error('precio_seg')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -104,7 +118,7 @@
             @isset($evento->ubicacion)
                 src="https://maps.google.com/maps?q={{$evento->ubicacion }}&ie=UTF8&output=embed">
             @else
-                src="https://maps.google.com/maps?q=Rodriugez peña 126&ie=UTF8&output=embed">
+                src="https://maps.google.com/maps?q=Rodriguez peña 126&ie=UTF8&output=embed">
             @endisset
             
         </iframe>
@@ -118,7 +132,7 @@
             @isset($evento->imagen)
                 <img id="imagen_evento" src="{{ Storage::url($evento->imagen) }}" alt="">
             @else
-                <img id="imagen_evento" src="\storage\{{ $general->imagen }}" alt="">
+                <img id="imagen_evento" src="{{ Storage::url ($general->imagen) }}" alt="">
             @endif
         </div>
     </div>

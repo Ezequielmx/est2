@@ -50,7 +50,8 @@ class EventoController extends Controller
             'direccion' => 'required',
             'ubicacion' =>'required',
             'precio' =>'required',
-            'precio_prom' =>'required'
+            'precio_prom' =>'required',
+            'precio_seg' =>'required'
         ]);
 
         if ($request->activo == 'on') {
@@ -76,6 +77,7 @@ class EventoController extends Controller
             'ubicacion' => $request->ubicacion,
             'precio' => $request->precio,
             'precio_prom' => $request->precio_prom,
+            'precio_seg' => $request->precio_seg,
             'activo' =>$act,
             'imagen' => $img
         ]);
@@ -122,7 +124,8 @@ class EventoController extends Controller
             'direccion' => 'required',
             'ubicacion' =>'required',
             'precio' =>'required',
-            'precio_prom' =>'required'
+            'precio_prom' =>'required',
+            'precio_seg' => 'required'
         ]);
 
         if ($request->activo == 'on') {
@@ -138,6 +141,7 @@ class EventoController extends Controller
         $evento->ubicacion = $request->ubicacion;
         $evento->precio = $request->precio;
         $evento->precio_prom = $request->precio_prom;
+        $evento->precio_seg = $request->precio_seg;
         $evento->activo =$act;
 
         if ($request->imagen) {

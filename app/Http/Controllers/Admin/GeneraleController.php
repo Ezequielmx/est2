@@ -79,6 +79,7 @@ class GeneraleController extends Controller
             'minutos' => 'required',
             'precio' => 'required',
             'precio_prom' => 'required',
+            'precio_seg' => 'required',
             'sobreventa' => 'required'
         ]);
 
@@ -92,6 +93,7 @@ class GeneraleController extends Controller
         $generale->minutos = $request->minutos;
         $generale->precio = $request->precio;
         $generale->precio_prom = $request->precio_prom;
+        $generale->precio_seg = $request->precio_seg;
         $generale->sobreventa = $request->sobreventa;
         
         $generale->save();
