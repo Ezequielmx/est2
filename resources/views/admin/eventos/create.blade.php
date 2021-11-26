@@ -3,7 +3,7 @@
 @section('title','Estrella del Plata')
 
 @section('content')
-    <h1>Crear Evento</h1>
+    <h1 style="padding:7px"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;Crear Evento</h1>
     <div class="card">
         <div class="card-body">
             {!! Form::open(['route' =>'admin.eventos.store', 'files' => true]) !!}

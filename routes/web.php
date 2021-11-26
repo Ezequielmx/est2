@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Livewire\ShowEvento;
 use App\Http\Livewire\ShowEventos;
-use App\Http\Livewire\TestMap;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,32 +16,11 @@ use App\Http\Livewire\TestMap;
 |
 */
 
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
     return view('admin.index');
 })->name('admin');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-//Route::get('/', HomeController::class)->name('home');
-
-
-
-
 Route::get('/', ShowEventos::class)->name('home');
-
-Route::get('/maps', TestMap::class);
-
-Route::get('/test', function () {return view('test');});
-
-/*Route::get('/admin', [AdminController::class, 'index'])->name('admin');*/
-
-/*Route::get('/reserva/{id_event}', [ReservaController::class, 'create'])->name('reserva.create');*/
-
-/*Route::post('reservas', [ReservaController::class, 'store'])->name('reserva.store');*/
 
 Route::get('/{id_event}', [EventoController::class, 'show'])->name('evento.show');
 

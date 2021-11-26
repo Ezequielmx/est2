@@ -8,8 +8,10 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="css/st.css">
@@ -37,8 +39,7 @@
         
         <x-jet-banner />
 
-
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

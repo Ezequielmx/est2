@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\FuncionController;
 use App\Http\Controllers\Admin\GeneraleController;
 use App\Http\Controllers\Admin\ReservaController;
 use App\Http\Controllers\Admin\TemaController;
+use App\Http\Controllers\Admin\UsuarioController;
 
 Route::get('', [GeneraleController::class, 'index']);
 
@@ -24,3 +25,5 @@ Route::resource('eventos', EventoController::class)->names('admin.eventos');
 Route::resource('funciones', FuncionController::class)->names('admin.funciones');
 
 Route::resource('reservas', ReservaController::class)->names('admin.reservas');
+
+Route::resource('usuarios', UsuarioController::class)->names('admin.usuarios');

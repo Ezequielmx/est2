@@ -268,19 +268,12 @@ return [
             'icon'        => 'fas fa-book-open',
             'active'      =>  ['admin/temas*'],     
         ],
-
-        [
-            'text'        => 'Reservas',
-            'url'         => 'admin/reservas',
-            'icon'        => 'fas fa-ticket-alt',
-            'active'      =>  ['admin/reservas*'],     
-        ],
-        
+                
         ['header' => 'ADMINISTRADOR'],
         
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Usuarios',
+            'url'  => 'admin/usuarios',
             'icon' => 'fas fa-fw fa-lock',
         ],
         

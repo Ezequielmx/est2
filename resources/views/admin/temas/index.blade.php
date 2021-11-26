@@ -10,11 +10,11 @@
     </div>
     @endif
 
-    <h1>Temas</h1>
+    <h1 style="padding:7px"><i class="fas fa-book-open"></i>&nbsp;&nbsp;Temas</h1>
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.temas.create') }}" class="btn btn-secondary">Agregar Tema</a>    
+            <a href="{{ route('admin.temas.create') }}" class="btn btn-primary">Agregar Tema</a>    
         </div>    
 
         <div class="card-body">

@@ -10,7 +10,7 @@
         <strong>{{ session('info') }}</strong>
     </div>
     @endif
-    <h1>Configuraciones Generales</h1>
+    <h1 style="padding:7px"><i class="fas fa-fw fa-tools"></i>&nbsp;&nbsp;Configuraciones Generales</h1>
     <div class="card" style="max-width: 1250px">
         <div class="card-body">
             {!! Form::model($generale, ['route' =>['admin.generales.update', $generale], 'files' => true, 'method' => 'put']) !!}

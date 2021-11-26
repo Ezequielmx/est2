@@ -3,7 +3,7 @@
 @section('title','Estrella del Plata')
 
 @section('content')
-    <h1>Crear Tema</h1>
+    <h1 style="padding:7px"><i class="fas fa-book-open"></i>&nbsp;&nbsp;Crear Tema</h1>
     <div class="card">
         <div class="card-body">
             {!! Form::open(['route' =>'admin.temas.store', 'files' => true]) !!}

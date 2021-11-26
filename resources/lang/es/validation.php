@@ -148,7 +148,8 @@ return [
 
     'attributes' => [
         'tel' => 'Celular',
-        'usuario' => 'Nombre'
+        'usuario' => 'Nombre',
+        'pass' => 'contraseña'
     ],
 
 ];

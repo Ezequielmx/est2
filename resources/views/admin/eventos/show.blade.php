@@ -3,6 +3,9 @@
 @section('title','Estrella del Plata')
 
 @section('content')
+    @php
+        setlocale(LC_TIME, "spanish");
+    @endphp	
 
     @if (session('info'))
     <div class="alert alert-success">
@@ -10,7 +13,7 @@
     </div>
     @endif
 
-    <h1>Funciones-Evento</h1>
+    <h1 style="padding:7px"><i class="fas fa-film"></i>&nbsp;&nbsp;Funciones</h1>
     <div class="card">
 
         <div class="card-header">
@@ -88,15 +91,15 @@
                 @foreach ($evento->funciones as $funcion)
                     <tr>
                         <td>{{ $temas[$funcion->tema_id] }}</td>
-                        <td>{{ $funcion->fecha }}</td>
-                        <td>{{ $funcion->horario }}</td>
+                        <td>{{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }}</td>
+                        <td>{{ strftime("%H:%M", strtotime($funcion->horario))}} hs.</td>
                         <td>{{ $funcion->capacidad }}</td>
                         <td>{{ $funcion->tot_res() }}</td>
                         <td width="10px">
                             <a class="btn btn-primary btn-sm" href="{{ route('admin.funciones.show', $funcion) }}">Reservas</a>
                         </td>
                         <td width="10px">
-                            <form action="{{ route('admin.funciones.destroy', $funcion, 1) }}" method="POST">
+                            <form action="{{ route('admin.funciones.destroy', $funcion) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

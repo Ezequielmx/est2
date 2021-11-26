@@ -10,11 +10,11 @@
     </div>
     @endif
 
-    <h1>Eventos</h1>
+    <h1 style="padding:7px"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;Eventos</h1>
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.eventos.create') }}" class="btn btn-secondary">Agregar Evento</a>    
+            <a href="{{ route('admin.eventos.create') }}" class="btn btn-primary">Agregar Evento</a>    
         </div>    
 
         <div class="card-body">

@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <h1>Funcion - Reservas</h1>
+    <h1 style="padding:7px"><i class="fas fa-ticket-alt"></i>&nbsp;&nbsp;Reservas</h1>
     <div class="card">
 
         <div class="card-header">
@@ -46,7 +46,7 @@
                         <td>$ {{ $reserva->importe }}</td>
                         <td>{{ $reserva->cant_adul }}</td>
                         <td width="10px">
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.reservas.destroy', $reserva) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

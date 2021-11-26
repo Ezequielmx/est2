@@ -4,15 +4,15 @@
     $tema=0;
     $fecha=0;
     @endphp 
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div 
-            class="mt-4 mb-4 rounded enc-evt"
-            style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/storage/{{ $evento->imagen }});   background-position: center;
-            background-size: cover;">
+            class="mt-4 rounded enc-evt"
+            style="background-image: url(/storage/{{ $evento->imagen }}); ">
             <div class="row p-3 text-white" >
                 <div class="col-md-6 col-lg-4">
-                    <h1 class="respneg tit-rck">{{ $evento->lugar }}</h1>
+                    <h1 class="respneg fgr">{{ $evento->lugar }}</h1>
                     <p class="respneg">
                         {{ $evento->speach }}
                     </p>
@@ -40,31 +40,24 @@
             </div>
         </div>
 @if($evento->fechas()->count() > 0)
-   
-        <div class="cont-func">
+        <br>
+            @livewire('reserva-evento', ['evento'=>$evento])  
+        <br>
+        <h2>Funciones</h2>
+        <div class="row mt-4" >
             <div>
-               <h1 class="tit-rck text-center">Funciones Disponibles</h1> 
-            </div>
-            <div class="cont-btn">
-                @livewire('reserva-evento', ['evento'=>$evento])  
-            </div>
-            
-        </div>
-        
-        <div class="row" >
-            <div><div><div>
             @foreach ( $evento->temas_func() as $funcion)
 
                     @if ($funcion->id != $tema)
-                        </div></div></div>
-                        <div class="col-md-6 col-lg-4 mt-4">
-                            <div class="card" style="width:100%; height:100%; margin-bottom:10px">
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card" style="width:100%">
                                 <img class="card-img-top" src="storage/{{ $funcion->imagen }}" alt="Card image" style="width:100%">
                                 <div class="card-body">
-                                    <h4 class="card-title tit-rck">{{ $funcion->titulo }} </h4>
-                                    <p class="card-text" style="color: #7d7e7e;">{{ $funcion->descripcion }} </p>
-                                
-                            
+                                    <h4 class="card-title">{{ $funcion->titulo }} </h4>
+                                    <p class="card-text">{{ $funcion->descripcion }} </p>
+                                </div>
+                            </div>
                             @php
                                 $tema =  $funcion->id;
                                 $fecha=0;
@@ -73,10 +66,9 @@
 
                     @if ($funcion->fecha != $fecha)
                         <br>
-                        <h4 style="color: #042c9d"><b>
+                        <h3>
                             <i class="fa fa-calendar" aria-hidden="true"></i> {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }}
-                        </h4></b>
-                      
+                        </h3>
                         @php
                             $fecha = $funcion->fecha
                         @endphp
@@ -86,10 +78,10 @@
                         $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total)
                     @endphp
 
-                    <hr>
+
                     <div class="flexh">
                         <div class="hor">
-                            <p style="margin-bottom: 0px; font-size: 1.1em;"><b>{{ strftime("%H:%M", strtotime($funcion->horario))}} hs.</b></p> 
+                            <span class="txthor">{{ strftime("%H:%M", strtotime($funcion->horario))}} hs.</span> 
                             @if ($disp > 0)
                                 {{ min($disp, rand(10,25)) }} disponibles 
                             @endif
@@ -102,7 +94,6 @@
                             @endif
                         </div>
                     </div>
-                    
             @endforeach
         </div>
 @endif

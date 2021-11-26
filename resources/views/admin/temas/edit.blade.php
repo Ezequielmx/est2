@@ -3,7 +3,7 @@
 @section('title','Estrella del Plata')
 
 @section('content')
-    <h1>Editar Tema</h1>
+    <h1 style="padding:7px"><i class="fas fa-book-open"></i>&nbsp;&nbsp;Editar Tema</h1>
     <div class="card">
         <div class="card-body">
             {!! Form::model($tema, ['route' =>['admin.temas.update', $tema], 'files' => true, 'method' => 'put']) !!}
