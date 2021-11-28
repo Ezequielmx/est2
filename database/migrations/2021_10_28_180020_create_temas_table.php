@@ -18,7 +18,7 @@ class CreateTemasTable extends Migration
             $table->string('titulo');
             $table->longText('descripcion');
             $table->string('imagen');
-            $table->string('video');
+            $table->string('video')->nullable();
             $table->integer('duracion');
             $table->timestamps();
         });

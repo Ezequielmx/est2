@@ -21,20 +21,7 @@
     position: relative;
     
 }
-/*
-.enc-evt::before{
-    content: '';
-    border-radius: 10px; 
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: linear-gradient(180deg, #140465 0%, #0EA8F3 100%);
-    opacity: 0.5;
-    z-index: -1;
-}
-*/
+
 .recbco
 {
     background-color: rgba(255, 255, 255, 0.7);
@@ -61,10 +48,98 @@
 }
 
 .hor{
-    width: 48%;
+    width: 60%;
 }
 
 .btnres{
-    width: 52%;
+    width: 40%;
 }
 
+.tit-rck{
+    font-family: "RocknRoll One", Sans-serif;
+    font-size: 2em;
+}
+
+.nav-men{
+    display: flex;
+}
+
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    bottom: 6rem !important;
+    z-index: 10;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 20rem;
+    background: #000;
+    color: white;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  
+  .containerz{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 50px;
+  }
+  
+  .overlay-image{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
+  }
+  
+  body {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+
+  .card-img-top{
+      min-height: 300px;
+  }
+
+  .cont-func{
+      position: relative;
+      background-color: white;
+      border-radius: 4px;
+      padding: 5px;
+      color: #404040;
+  }
+
+  .cont-btn{
+    /*position: absolute;
+    top: 12px;
+    right: 12px;*/
+    text-align: center;
+  }
+
+  @media (min-width: 800px) {
+    .cont-btn{
+        position: absolute;
+        top: 12px;
+        right: 12px;
+    }
+}

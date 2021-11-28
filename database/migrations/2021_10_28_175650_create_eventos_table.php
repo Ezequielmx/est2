@@ -21,7 +21,7 @@ class CreateEventosTable extends Migration
             $table->longText('speach');
             $table->float('precio');
             $table->float('precio_prom');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->boolean('activo');
             $table->timestamps();
         });

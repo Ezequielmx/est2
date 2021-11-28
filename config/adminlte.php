@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Estrella del Plata</b>',
-    'logo_img' => 'public/img/logo.jpg',
+    'logo_img' => 'img/isocirc.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -256,31 +256,24 @@ return [
 
         [
             'text'        => 'Eventos',
-            'icon'        => 'fas fa-fw fa-tools',
-            'submenu' => [
-                [
-                    'text'        => 'Evento',
-                    'url'         => 'admin/configuracione',
-                    'icon'        => 'fas fa-fw fa-tools',
-                ], 
-                [
-                    'text'        => 'Funciones',
-                    'url'         => 'admin/configuracione',
-                    'icon'        => 'fas fa-fw fa-tools',
-                ],    
-            ],
+            'url'         => 'admin/eventos',
+            'icon'        => 'fas fa-bullhorn',
+            'active'      =>  ['admin/eventos*'],   
+      
         ],
+      
         [
             'text'        => 'Temas',
-            'url'         => 'admin/configuracione',
-            'icon'        => 'fas fa-fw fa-tools',
+            'url'         => 'admin/temas',
+            'icon'        => 'fas fa-book-open',
+            'active'      =>  ['admin/temas*'],     
         ],
-        
+                
         ['header' => 'ADMINISTRADOR'],
         
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Usuarios',
+            'url'  => 'admin/usuarios',
             'icon' => 'fas fa-fw fa-lock',
         ],
         

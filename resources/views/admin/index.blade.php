@@ -3,15 +3,11 @@
 @section('title','Estrella del Plata')
 
 @section('content header')
-
     <h1>Estrella del Plata</h1>
-
 @stop
 
 @section('content')
-
     <p>Bienvenido al panel de configuraciones</p>
-
 @stop
 
 @section('css')

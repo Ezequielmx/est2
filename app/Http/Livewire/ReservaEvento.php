@@ -7,7 +7,7 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
-use phpDocumentor\Reflection\Types\This;
+use App\View\Components\alert1;
 
 class ReservaEvento extends Component
 {
@@ -15,6 +15,7 @@ class ReservaEvento extends Component
 
     public $open = false;
     public $entr_gral = 1;
+    public $entr_seg = 0;
     public $usuario = null;
     public $tel = null;
     public $selectedFunc1 = null;
@@ -25,6 +26,12 @@ class ReservaEvento extends Component
     public $func_id;
     public $sobreventa;
     public $maxEntr;
+    public $cant_funciones=1;
+
+    protected $rules = [
+        'usuario' => 'required|min:3',
+        'tel' => 'required|digits:10'
+    ];
 
     public function mount(Evento $evento, int $func_id = null){
         $this->maxEntr = 10;
@@ -37,6 +44,11 @@ class ReservaEvento extends Component
         if (is_null($this->selectedFunc1)) {
             $this->selectedFunc1 = $this->evento->temas_func()->first()->func_id;
         }
+
+        $func1 = $this->evento->temas_func()->where('func_id','=', $this->selectedFunc1)->first();
+        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
+
+        $this->maxEntr = min(10, $disp_func1);
         
     }
 
@@ -47,11 +59,12 @@ class ReservaEvento extends Component
         $func1 = $this->evento->temas_func()->where('func_id','=', $func1_id)->first();
         $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
-        $this->maxEntr = min(7, $disp_func1);
+        $this->maxEntr = min(10, $disp_func1);
         $this->entr_gral = min($this->entr_gral, $this->maxEntr);
 
         $this->selectedFunc2 = null;
         $this->precio = $this->evento->precio;
+        $this->cant_funciones=1;
 
     }
 
@@ -59,6 +72,7 @@ class ReservaEvento extends Component
     {
         if ($func2_id == null) {
             $this->precio = $this->evento->precio;
+            $this->cant_funciones=1;
         }
         else{
             $func2 = $this->evento->temas_func()->where('func_id','=', $func2_id)->first();
@@ -66,26 +80,41 @@ class ReservaEvento extends Component
     
             $this->maxEntr = min($this->maxEntr, $disp_func2);
             $this->entr_gral = min($this->entr_gral, $this->maxEntr);
-            $this->precio = $this->evento->precio_prom*2;
-
+            $this->precio = $this->evento->precio_prom;
+            $this->cant_funciones=2;
         }
+    }
+
+    public function updated()
+    {
+
+        if ( ($this->entr_gral + $this->entr_seg) > $this->maxEntr) {
+            $this->entr_seg = $this->maxEntr - $this->entr_gral;
+            
+        }
+
     }
 
 
     public function save()
     {
+        $this->validate();
+
         setlocale(LC_TIME, "spanish");
         
         $reserva = new Reserva();
 
-        $reserva->codigo_res="ASD1234";
+        $reserva->codigo_res="123";
         $reserva->importe=$this->entr_gral * $this->precio;
         $reserva->usuario = $this->usuario;
         $reserva->telefono = $this->tel;
         $reserva->cant_adul = $this->entr_gral;
+        $reserva->cant_esp = $this->entr_seg;
         $reserva->wppconf = '0';
         $reserva->wpprecord = '0';
 
+        $reserva->save();
+        $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
         $reserva->save();
 
         $reserva->funciones()->attach($this->selectedFunc1);

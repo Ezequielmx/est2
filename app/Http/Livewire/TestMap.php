@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class FormResComponent extends Component
+class TestMap extends Component
 {
+    public $ubicacion;
+    
     public function render()
     {
-        return view('livewire.form-res-component');
+        return view('livewire.test-map');
     }
 }
