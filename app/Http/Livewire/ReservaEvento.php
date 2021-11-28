@@ -7,6 +7,7 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
+use App\View\Components\alert1;
 
 class ReservaEvento extends Component
 {
@@ -82,6 +83,16 @@ class ReservaEvento extends Component
             $this->precio = $this->evento->precio_prom;
             $this->cant_funciones=2;
         }
+    }
+
+    public function updated()
+    {
+
+        if ( ($this->entr_gral + $this->entr_seg) > $this->maxEntr) {
+            $this->entr_seg = $this->maxEntr - $this->entr_gral;
+            
+        }
+
     }
 
 

@@ -28,7 +28,7 @@ class Funcione extends Model
         $tot_res = DB::table('funciones')
         ->leftjoin('funcione_reserva', 'funcione_reserva.funcione_id', '=', 'funciones.id')
         ->leftjoin('reservas', 'funcione_reserva.reserva_id', '=', 'reservas.id')
-        ->select(DB::raw('COALESCE(SUM(cant_adul),0) as ent_reserv'))
+        ->select(DB::raw('SUM(COALESCE(cant_adul,0)+COALESCE(cant_esp,0))  as ent_reserv'))
         ->where('funciones.id', '=', $this->id)
         ->groupBy('funciones.id')
         ->value('ent_reserv');

@@ -41,8 +41,10 @@
                             
                         @endforeach
                         @foreach ( $funciones as $funcion)
-                        @if ($funcion->func_id != $func_id && ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total)) >0)
-                            <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ $funcion->horario }}</option>    
+                        @if ($funcion->func_id != $func_id && ($funcion->capacidad * (1 + $sobreventa/100)-($funcion->cant_total) > 0))
+                            <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ $funcion->horario }}
+                                {{ $funcion->capacidad }} - {{ $sobreventa }} - {{ $funcion->cant_total }} - {{ ($funcion->capacidad * (1 + $sobreventa/100) - ($funcion->cant_total)) > 0}}
+                            </option>    
                         @endif
                         
                         @endforeach
@@ -75,17 +77,13 @@
                 </div>
                 <div class="col">
                     <b><label for="cant_men">Cantidad de Entradas Niños menores de 3 años - $ {{ $evento->precio_seg }}c/u::</label></b>
-                    <input type="number" class="form-control" name="cant_men" min="0" max={{ $maxEntr }} value="1" wire:model="entr_seg">
+                    <input type="number" class="form-control" name="cant_men" min="0" max={{ $maxEntr - $entr_gral }} value="1" wire:model="entr_seg">
                 </div>
                 <div class="col"><br>
                     <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg) }}</b></h3></span>
                 </div>
-                {{ $func1->id }}
-                {{ $func1->cant_total }}
             </div>
-
-            
-
+         
         </form>
         </x-slot>
 

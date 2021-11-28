@@ -34,7 +34,8 @@
                         <th>Telefono</th>
                         <th>Código</th>
                         <th>Importe</th>
-                        <th>Cantidad</th>
+                        <th>Cantidad Adultos</th>
+                        <th>Cantidad Niños</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                         <td>{{ $reserva->codigo_res }}</td>
                         <td>$ {{ $reserva->importe }}</td>
                         <td>{{ $reserva->cant_adul }}</td>
+                        <td>{{ $reserva->cant_esp}}</td>
                         <td width="10px">
                             <form action="{{ route('admin.reservas.destroy', $reserva) }}" method="POST">
                                 @csrf
