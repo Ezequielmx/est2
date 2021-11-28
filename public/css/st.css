@@ -21,20 +21,7 @@
     position: relative;
     
 }
-/*
-.enc-evt::before{
-    content: '';
-    border-radius: 10px; 
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: linear-gradient(180deg, #140465 0%, #0EA8F3 100%);
-    opacity: 0.5;
-    z-index: -1;
-}
-*/
+
 .recbco
 {
     background-color: rgba(255, 255, 255, 0.7);
@@ -143,7 +130,16 @@
   }
 
   .cont-btn{
-    position: absolute;
+    /*position: absolute;
     top: 12px;
-    right: 12px;
+    right: 12px;*/
+    text-align: center;
   }
+
+  @media (min-width: 800px) {
+    .cont-btn{
+        position: absolute;
+        top: 12px;
+        right: 12px;
+    }
+}

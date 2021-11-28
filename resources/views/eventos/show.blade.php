@@ -4,22 +4,23 @@
     $tema=0;
     $fecha=0;
     @endphp 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl px-2 mx-auto sm:px-4 lg:px-8">
 
         <div 
             class="mt-4 mb-4 rounded enc-evt"
             style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/storage/{{ $evento->imagen }});   background-position: center;
             background-size: cover;">
             <div class="row p-3 text-white" >
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 mb-2">
                     <h1 class="respneg tit-rck">{{ $evento->lugar }}</h1>
                     <p class="respneg">
                         {{ $evento->speach }}
                     </p>
                     
-                    <span class="badge bg-danger" style="font-size:1.1em">Entrada Gral: ${{ $evento->precio }}</span>
+                    <span class="badge bg-danger mb-1" style="font-size:1.1em">Entrada General: ${{ $evento->precio }}</span>
+                    <span class="badge bg-danger" style="font-size:1.1em">Menores de 3 años: ${{ $evento->precio_seg }}</span>
                 </div>
-                <div class="col-md-6 col-lg-4 recbco">
+                <div class="col-md-6 col-lg-4 mb-2 recbco">
                     <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Donde?</h2>
                     <p>{{ $evento->direccion }}</p>   
                     <h2 style="color: #990412"><i class="fa fa-calendar"></i>   Cuando?</h2>
@@ -34,8 +35,8 @@
                     <h2 style="color: #990412"><i class="fa fa-clock-o"></i>   Duración</h2>
                     <p>{{ $evento->duracion()->minutos }} minutos</p>   
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <iframe src="https://maps.google.com/maps?q={{ $evento->ubicacion }}&ie=UTF8&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="col-md-6 col-lg-4 mb-2">
+                    <iframe src="https://maps.google.com/maps?q={{ $evento->ubicacion }}&ie=UTF8&output=embed" width="100%" height="100%" style="border:0; min-height:250px" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>

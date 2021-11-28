@@ -9,7 +9,7 @@
         setlocale(LC_TIME, "spanish");	
     @endphp 
 
-     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 te">
+     <div class="max-w-7xl mx-auto sm:px-0 lg:px-8 te">
       <h1 class="tit-rck mb-4 mt-4 text-center respneg" style="color: white">No te pierdas los próximos EVENTOS!!</h1>
 
       <div class="row">

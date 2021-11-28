@@ -18,12 +18,12 @@
             @csrf
             <input type="text" class="form-control" name="evento_id" value="{{ $evento->id }}" readonly hidden>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <b><label for="usuario" class="form-label">Tu Nombre:</label></b>
                     <input type="text" class="form-control" placeholder="Tu nombre" name="usuario" required wire:model="usuario">
                     <x-jet-input-error for="usuario"/> 
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <b><label for="telefono" class="form-label">Celular:</label></b>
                     <input type="cel" class="form-control" name="telefono" placeholder="Sin 0 y sin 15 Ej: 1160208707" pattern="[0-9]{10}" required wire:model="tel">
                     <x-jet-input-error for="tel"/> 
@@ -71,15 +71,15 @@
             <br>
     
             <div class="row">
-                <div class="col">
+                <div class="col-md-4">
                     <b><label for="cant_adul">Cantidad de Entradas Generales-Adultos - $ {{ $precio }}c/u:</label></b>
                     <input type="number" class="form-control" name="cant_adul" min="1" max={{ $maxEntr }} value="1" wire:model="entr_gral">
                 </div>
-                <div class="col">
+                <div class="col-md-4">
                     <b><label for="cant_men">Cantidad de Entradas Niños menores de 3 años - $ {{ $evento->precio_seg }}c/u::</label></b>
                     <input type="number" class="form-control" name="cant_men" min="0" max={{ $maxEntr - $entr_gral }} value="1" wire:model="entr_seg">
                 </div>
-                <div class="col"><br>
+                <div class="col-md-4"><br>
                     <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg) }}</b></h3></span>
                 </div>
             </div>
