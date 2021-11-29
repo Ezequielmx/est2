@@ -7,7 +7,6 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
-use App\View\Components\alert1;
 
 class ReservaEvento extends Component
 {
@@ -23,6 +22,7 @@ class ReservaEvento extends Component
     public $funciones1 = null;
     public $funciones2 = null;
     public $precio = 0;
+    public $precio_seg = 0;
     public $func_id;
     public $sobreventa;
     public $maxEntr;
@@ -39,6 +39,7 @@ class ReservaEvento extends Component
         $this->func_id = $func_id;
         $this->selectedFunc1 = $func_id;
         $this->precio = $this->evento->precio;
+        $this->precio_seg = $this->evento->precio_seg;
         $this->sobreventa = Generale::First()->value('sobreventa');
         
         if (is_null($this->selectedFunc1)) {
@@ -87,12 +88,9 @@ class ReservaEvento extends Component
 
     public function updated()
     {
-
         if ( ($this->entr_gral + $this->entr_seg) > $this->maxEntr) {
             $this->entr_seg = $this->maxEntr - $this->entr_gral;
-            
         }
-
     }
 
 
@@ -105,7 +103,7 @@ class ReservaEvento extends Component
         $reserva = new Reserva();
 
         $reserva->codigo_res="123";
-        $reserva->importe=$this->entr_gral * $this->precio;
+        $reserva->importe=$this->entr_gral * $this->precio * $this->cant_funciones + $this->entr_seg * $this->precio_seg * $this->cant_funciones;
         $reserva->usuario = $this->usuario;
         $reserva->telefono = $this->tel;
         $reserva->cant_adul = $this->entr_gral;

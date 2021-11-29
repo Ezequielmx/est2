@@ -32,7 +32,7 @@
 
 
 <div class="row mb-3">
-    <div class="col">
+    <div class="col-md-4">
         <div class="image-wrapper">
             @isset($tema->imagen)
                 <img id="imagen_tema" src="{{ Storage::url($tema->imagen) }}" alt="">
@@ -42,7 +42,7 @@
             
         </div>
     </div>
-    <div class="col">
+    <div class="col-md-8">
         <div class="form-group">
             {!! Form::label('imagen', 'Imagen del Tema') !!}
             {!! Form::file('imagen', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}

@@ -33,7 +33,8 @@ class SaveResSheet{
         $this->tema1 = Tema::find($this->func1->tema_id);
 
         $values = [[
-            $this->evento ->id, $this->evento ->lugar, 
+            $this->evento ->id, 
+            $this->evento ->lugar, 
             $this->selectedFunc1, 
             $this->tema1->titulo, 
             $this->func1->fecha, 
@@ -42,6 +43,7 @@ class SaveResSheet{
             $this->reserva->usuario, 
             $this->reserva->telefono,
             $this->reserva->cant_adul,
+            $this->reserva->cant_esp,
             $this->reserva->importe,
             $this->func1->capacidad 
         ]];
@@ -60,6 +62,7 @@ class SaveResSheet{
                 $this->reserva->usuario, 
                 $this->reserva->telefono,
                 $this->reserva->cant_adul,
+                $this->reserva->cant_esp,
                 $this->reserva->importe,
                 $this->func2->capacidad 
             ];
@@ -82,14 +85,12 @@ class SaveResSheet{
         $url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
         $cel = "549". $this->reserva->telefono;
         
-
-        //$mens = "*Hola " . $this->reserva->usuario . "*\n";
-
         $mens = "*Hola " . $this->reserva->usuario . "*\n";
         $mens .= "Esta confirmada tu reserva para el Planetario Móvil en *".  $this->evento->lugar ."* \n";
         $mens .= "-".  $this->evento->direccion ."- \n";
         $mens .= "CODIGO DE RESERVA: *" . str_pad($this->reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
-        $mens .= "Cantidad de Entradas: *". $this->reserva->cant_adul . "*\n";
+        $mens .= "Cantidad de Entradas Generales: *". $this->reserva->cant_adul . "*\n";
+        $mens .= "Menores de 3 años: *". $this->reserva->cant_esp . "*\n";
         $mens .= "----------------\n";
         if (!is_null($this->func2)) {
             $mens .= "Funciones: \n";
