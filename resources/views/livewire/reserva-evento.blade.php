@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-6">
                     <b><label for="telefono" class="form-label">Celular:</label></b>
-                    <input type="cel" class="form-control" name="telefono" placeholder="Sin 0 y sin 15 Ej: 1160208707" pattern="[0-9]{10}" required wire:model="tel">
+                    <input type="number" class="form-control" name="telefono" placeholder="Sin 0 y sin 15 Ej: 1160208707" required wire:model="tel">
                     <x-jet-input-error for="tel"/> 
                 </div>
             </div>
@@ -42,8 +42,7 @@
                         @endforeach
                         @foreach ( $funciones as $funcion)
                         @if ($funcion->func_id != $func_id && ($funcion->capacidad * (1 + $sobreventa/100)-($funcion->cant_total) > 0))
-                            <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ $funcion->horario }}
-                                {{ $funcion->capacidad }} - {{ $sobreventa }} - {{ $funcion->cant_total }} - {{ ($funcion->capacidad * (1 + $sobreventa/100) - ($funcion->cant_total)) > 0}}
+                            <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ strftime("%H:%M", strtotime($funcion->horario ))}}
                             </option>    
                         @endif
                         
@@ -60,8 +59,9 @@
                     <select class="form-control" name="funcion2" wire:model="selectedFunc2">
                         <option value="" >------------------------------</option>
                         @foreach ( $funciones as $funcion2)
-                            @if ($funcion2->func_id !=  $selectedFunc1 && ($funcion2->capacidad * (1 + $sobreventa/100))-($funcion2->cant_total)) >0)
-                                <option value="{{ $funcion2->func_id }}">{{ $funcion2->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion2->fecha))) }} - {{ $funcion2->horario }}</option>
+                            @if ($funcion2->func_id !=  $selectedFunc1 && ($funcion2->capacidad * (1 + $sobreventa/100)-($funcion2->cant_total) > 0))
+                                <option value="{{ $funcion2->func_id }}">{{ $funcion2->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion2->fecha))) }} - {{ strftime("%H:%M", strtotime($funcion2->horario ))}}
+                                </option>
                             @endif
                         @endforeach
                     </select>
@@ -72,15 +72,25 @@
     
             <div class="row">
                 <div class="col-md-4">
-                    <b><label for="cant_adul">Cantidad de Entradas Generales-Adultos - $ {{ $precio }}c/u:</label></b>
-                    <input type="number" class="form-control" name="cant_adul" min="1" max={{ $maxEntr }} value="1" wire:model="entr_gral">
+                    <b><label for="cant_adul">Entradas Generales</label></b>
+                    <select class="form-control" name="cant_adul" wire:model="entr_gral">
+                        @for ($i=1; $i <= $maxEntr; $i++ )
+                        <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                    <p>Mayores de 3 años - $ {{ $precio }}c/u.</p>
                 </div>
                 <div class="col-md-4">
-                    <b><label for="cant_men">Cantidad de Entradas Niños menores de 3 años - $ {{ $evento->precio_seg }}c/u::</label></b>
-                    <input type="number" class="form-control" name="cant_men" min="0" max={{ $maxEntr - $entr_gral }} value="1" wire:model="entr_seg">
+                    <b><label for="cant_men">Menores de 3 años:</label></b>
+                    <select class="form-control" name="cant_men" wire:model="entr_seg">
+                        @for ($i=0; $i <= $maxEntr - $entr_gral; $i++ )
+                        <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                    <p>Seguro - menores de 3 años  - $ {{ $precio_seg }}c/u.</p>
                 </div>
                 <div class="col-md-4"><br>
-                    <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg) }}</b></h3></span>
+                    <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg * $cant_funciones) }}</b></h3></span>
                 </div>
             </div>
          
