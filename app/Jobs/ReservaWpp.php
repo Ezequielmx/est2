@@ -13,8 +13,6 @@ use App\Models\Reserva;
 
 
 
-
-
 class ReservaWpp implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

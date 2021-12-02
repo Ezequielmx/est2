@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('wpprecord:task');
+        $schedule->command('wpprecord:task')->timezone('America/Argentina/Buenos_Aires')->twiceDaily(9, 10);
     }
 
     /**
