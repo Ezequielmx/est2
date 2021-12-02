@@ -1244,6 +1244,9 @@ select {
 .ml-auto {
 	margin-left: auto;
 }
+.mb-1 {
+	margin-bottom: 0.25rem;
+}
 .block {
 	display: block;
 }
@@ -1705,6 +1708,9 @@ select {
 }
 .pt-8 {
 	padding-top: 2rem;
+}
+.pb-2 {
+	padding-bottom: 0.5rem;
 }
 .text-left {
 	text-align: left;
@@ -2291,6 +2297,11 @@ select {
 	.sm\:px-20 {
 		padding-left: 5rem;
 		padding-right: 5rem;
+	}
+
+	.sm\:px-4 {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 
 	.sm\:pt-0 {
