@@ -22,8 +22,8 @@ class CreateFuncionesTable extends Migration
             $table->time('horario');
             $table->integer('capacidad');
 
-            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');
-            $table->foreign('tema_id')->references('id')->on('temas')->onDelete('cascade');
+            //$table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');
+            //$table->foreign('tema_id')->references('id')->on('temas')->onDelete('cascade');
 
             $table->timestamps();
         });

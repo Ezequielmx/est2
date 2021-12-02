@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc3e22aee675a1e6f013a9bffa47dcba",
+    "content-hash": "24b1bb24a4c04c09a91e456730537622",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -2501,6 +2501,46 @@
                 }
             ],
             "time": "2021-10-20T02:27:35+00:00"
+        },
+        {
+            "name": "mikechip/chatapi",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikechip/whatsapp-chatapi-sdk.git",
+                "reference": "d883ffb2df76167d0a266dd507d9baa82d9cd379"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikechip/whatsapp-chatapi-sdk/zipball/d883ffb2df76167d0a266dd507d9baa82d9cd379",
+                "reference": "d883ffb2df76167d0a266dd507d9baa82d9cd379",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "chatapi.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Boris Stelmakh",
+                    "email": "mikael.chip@gmail.com"
+                }
+            ],
+            "description": "Simple middleware to work with Chat-API.com",
+            "support": {
+                "issues": "https://github.com/mikechip/whatsapp-chatapi-sdk/issues",
+                "source": "https://github.com/mikechip/whatsapp-chatapi-sdk/tree/master"
+            },
+            "time": "2019-04-27T06:36:19+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

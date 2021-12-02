@@ -18,8 +18,8 @@ class CreateFuncioneReservaTable extends Migration
             $table->unsignedBigInteger('funcione_id');
             $table->unsignedBigInteger('reserva_id');
 
-            $table->foreign('funcione_id')->references('id')->on('funciones')->onDelete('cascade');
-            $table->foreign('reserva_id')->references('id')->on('reservas')->onDelete('cascade');
+            //$table->foreign('funcione_id')->references('id')->on('funciones')->onDelete('cascade');
+            //$table->foreign('reserva_id')->references('id')->on('reservas')->onDelete('cascade');
 
 
             $table->timestamps();

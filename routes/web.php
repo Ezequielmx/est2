@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
 use App\Http\Livewire\ShowEventos;
+use App\Http\Controllers\WppController;
 
 
 /*

@@ -20,6 +20,7 @@ class CreateEventosTable extends Migration
             $table->string('direccion');
             $table->longText('speach');
             $table->float('precio');
+            $table->float('precio_seg');
             $table->float('precio_prom');
             $table->string('imagen')->nullable();
             $table->boolean('activo');
