@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Services;
-use App\Services\GoogleSheet;
+
+use App\Jobs\ReservaWpp;
 use App\Models\Reserva;
 use App\Models\Evento;
 use App\Models\Funcione;
 use App\Models\Tema;
+use App\Jobs\ReservaSheet;
 
 
-class SaveResSheet{
+class SaveResSheet
+{
 
     public $evento;
     public $reserva;
@@ -33,8 +36,8 @@ class SaveResSheet{
         $this->tema1 = Tema::find($this->func1->tema_id);
 
         $values = [[
-            $this->evento ->id, 
-            $this->evento ->lugar, 
+            $this->evento->id, 
+            $this->evento->lugar, 
             $this->selectedFunc1, 
             $this->tema1->titulo, 
             $this->func1->fecha, 
@@ -71,18 +74,18 @@ class SaveResSheet{
         }
 
 
-        //return $values;
+        ReservaSheet::dispatch($values);
+
+        /*
         $sheet = new GoogleSheet;
 
-        $sheet->saveDataToSheet($values);
+        $sheet->saveDataToSheet($values);*/
     }
 
     public function wppConf()
     {
-        $token = config( key:'chatapi.chat_api_token');
-        $instanceId = config( key:'chatapi.chat_api_instance_id');
+            
 
-        $url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
         $cel = "549". $this->reserva->telefono;
         
         $mens = "*Hola " . $this->reserva->usuario . "*\n";
@@ -110,25 +113,7 @@ class SaveResSheet{
         $mens .= "*Medios de pago? | Solo en efectivo*\n\n";
         $mens .= "Por favor sino vas al evento, avísanos, así la reserva se la damos a otra persona que si quiera ir!\n\nLa reserva de entradas es *un compromiso de asistencia  al evento*. Pedimos por favor, que no nos fallen. *Gracias!*";
 
-        
-        $data = [
-            'phone' => $cel, // Receivers phone
-            'body' => $mens, // Message
-            ];
-            $json = json_encode($data); // Encode data to JSON
-            // URL for request POST /message
-
-            // Make a POST request
-            $options = stream_context_create(['http' => [
-                    'method'  => 'POST',
-                    'header'  => 'Content-type: application/json',
-                    'content' => $json
-                ]
-            ]);
-        // Send a request
-        //MANDA WPP - VER TRY-CATCH para Manejar excepcion
-        
-        file_get_contents($url, false, $options); 
+        ReservaWpp::dispatch($this->reserva->id, $cel, $mens);
 
     }
 

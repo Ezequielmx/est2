@@ -128,6 +128,7 @@ class ReservaEvento extends Component
 
         $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
 
+
         $resSheet = new SaveResSheet($reserva, $this->evento, $this->selectedFunc1, $this->selectedFunc2);
        
         
@@ -137,7 +138,7 @@ class ReservaEvento extends Component
 
         
 
-        $this->emit('render');
+        
     }
 
     public function render()

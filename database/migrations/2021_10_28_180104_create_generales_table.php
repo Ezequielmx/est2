@@ -14,9 +14,10 @@ class CreateGeneralesTable extends Migration
     public function up()
     {
         Schema::create('generales', function (Blueprint $table) {
+            $table->id('id');
             $table->string('imagen');
             $table->longText('speach');
-            $table->integer('minutos',3);
+            $table->integer('minutos');
             $table->float('precio');
             $table->float('precio_prom');
             $table->float('precio_seg');
