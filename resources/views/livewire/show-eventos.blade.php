@@ -24,6 +24,9 @@
                           <img class="card-img-top" src="storage/{{ $evento->imagen }}" alt="Card image" style="width:100%">
                           <div class="card-body">
                             <h4 class="card-title tit-rck">{{ $evento->lugar }}</h4>
+                            <x-jet-danger-button>
+                              Reservar Entradas
+                            </x-jet-danger-button>
                             <hr>
                               @foreach ($evento->fechas() as $fecha)
                               <li style="font-size: 1.1em; font-weight: bold;">

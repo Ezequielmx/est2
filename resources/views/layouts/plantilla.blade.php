@@ -18,12 +18,24 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E4DY2SX1MN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E4DY2SX1MN');
+    </script>
+    
 
 </head>
 <body>
     <div class="container">
         @yield('content')
     </div>
-    
+    <a href="https://api.whatsapp.com/send?phone=+5491141462850" class="btn-wsp" target="_blank">
+	    <i class="fa fa-whatsapp icono"></i>
+	</a>
 </body>
 </html>

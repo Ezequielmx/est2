@@ -93,7 +93,7 @@ class SaveResSheet
         $mens .= "-".  $this->evento->direccion ."- \n";
         $mens .= "CODIGO DE RESERVA: *" . str_pad($this->reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
         $mens .= "Cantidad de Entradas Generales: *". $this->reserva->cant_adul . "*\n";
-        $mens .= "Menores de 3 años: *". $this->reserva->cant_esp . "*\n";
+        $mens .= "Seguro (menores de 3 años ó CUD): *". $this->reserva->cant_esp . "*\n";
         $mens .= "----------------\n";
         if (!is_null($this->func2)) {
             $mens .= "Funciones: \n";

@@ -34,8 +34,22 @@
 
         <!-- sweetalert -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+           <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-E4DY2SX1MN"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-E4DY2SX1MN');
+            </script>
     </head>
     <body class="font-sans antialiased">
+        <a href="https://api.whatsapp.com/send?phone=+5491141462850" class="btn-wsp" target="_blank">
+            <i class="fa fa-whatsapp icono"></i>
+        </a>
         
         <x-jet-banner />
 

@@ -36,7 +36,7 @@
                     <select class="form-control" name="funcion1" wire:model="selectedFunc1">
                         @foreach ($funciones as $funcion)
                             @if ($funcion->func_id == $func_id )
-                                <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ $funcion->horario }}</option>    
+                                <option value="{{ $funcion->func_id }}">{{ $funcion->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha))) }} - {{ strftime("%H:%M", strtotime($funcion->horario ))}}</option>    
                             @endif
                             
                         @endforeach
@@ -81,13 +81,13 @@
                     <p>Mayores de 3 años - $ {{ $precio }}c/u.</p>
                 </div>
                 <div class="col-md-4">
-                    <b><label for="cant_men">Menores de 3 años:</label></b>
+                    <b><label for="cant_men">Seguro:</label></b>
                     <select class="form-control" name="cant_men" wire:model="entr_seg">
                         @for ($i=0; $i <= $maxEntr - $entr_gral; $i++ )
                         <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
-                    <p>Seguro - menores de 3 años  - $ {{ $precio_seg }}c/u.</p>
+                    <p>Menores de 3 años ó CUD - $ {{ $precio_seg }}c/u.</p>
                 </div>
                 <div class="col-md-4"><br>
                     <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg * $cant_funciones) }}</b></h3></span>
