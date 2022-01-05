@@ -17,8 +17,8 @@
                         {{ $evento->speach }}
                     </p>
                     
-                    <span class="badge bg-danger mb-1" style="font-size:1.1em">Entrada General: ${{ $evento->precio }}</span>
-                    <span class="badge bg-danger" style="font-size:1.1em">Menores de 3 años: ${{ $evento->precio_seg }}</span>
+                    <span class="badge bg-danger mb-1" style="font-size:1.1em">Valor Entradas: ${{ $evento->precio }}</span>
+                    <span class="badge bg-danger" style="font-size:1.1em">Menores de 3 años/CUD: ${{ $evento->precio_seg }}</span>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-2 recbco">
                     <h2 style="color: #990412"><i class="fa fa-map-marker"></i>   Donde?</h2>
@@ -41,14 +41,34 @@
             </div>
         </div>
 @if($evento->fechas()->count() > 0)
+        @php
+        $entdisp=false;
+        foreach($evento->temas_func() as $funcion)
+        {
+            $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total);
+            if($disp > 0)
+            {
+                $entdisp=true;
+                break;
+            }
+        }
+        @endphp
    
         <div class="cont-func">
             <div>
-               <h1 class="tit-rck text-center">Funciones Disponibles</h1> 
+                @if ($entdisp)
+                    <h1 class="tit-rck text-center">Funciones Disponibles</h1>
+                @else
+                    <h1 class="tit-rck text-center">Entradas Agotadas</h1>
+                @endif
+               
             </div>
-            <div class="cont-btn">
-                @livewire('reserva-evento', ['evento'=>$evento])  
-            </div>
+            
+            @if ($entdisp)
+                <div class="cont-btn">
+                    @livewire('reserva-evento', ['evento'=>$evento])  
+                </div>
+            @endif
             
         </div>
         

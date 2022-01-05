@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Reserva;
 
-class ReservaController extends Controller
+class NuevaReservaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        return view('admin.reservas.index');
+        return view('admin.nuevareserva.index');
     }
 
     /**
@@ -73,12 +72,14 @@ class ReservaController extends Controller
         //
     }
 
-
-    public function destroy(Reserva $reserva)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $funcione = $reserva->funciones->first();
-
-        $reserva->delete();
-        return redirect()->route('admin.funciones.show', $funcione)->with('info', 'La Reserva se eliminó con éxito');
+        //
     }
 }

@@ -268,6 +268,27 @@ return [
             'icon'        => 'fas fa-book-open',
             'active'      =>  ['admin/temas*'],     
         ],
+
+        [
+            'text'        => 'Buscar Reservas',
+            'url'         => 'admin/reservas',
+            'icon'        => 'fas fa-search',
+            'active'      =>  ['admin/reservas*'],     
+        ],
+
+        [
+            'text'        => 'Nueva Reserva',
+            'url'         => 'admin/nuevareserva',
+            'icon'        => 'fas fa-ticket-alt',
+            'active'      =>  ['admin/nuevareserva*'],     
+        ],
+
+        [
+            'text'        => 'Mensajes',
+            'url'         => 'admin/mensajes',
+            'icon'        => 'fab fa-whatsapp',
+            'active'      =>  ['admin/mensajes*'],     
+        ],
                 
         ['header' => 'ADMINISTRADOR'],
         
@@ -431,5 +452,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

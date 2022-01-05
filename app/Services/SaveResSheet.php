@@ -92,8 +92,8 @@ class SaveResSheet
         $mens .= "Esta confirmada tu reserva para el Planetario Móvil en *".  $this->evento->lugar ."* \n";
         $mens .= "-".  $this->evento->direccion ."- \n";
         $mens .= "CODIGO DE RESERVA: *" . str_pad($this->reserva->id, 4 ,"0", STR_PAD_LEFT) . "*\n";
-        $mens .= "Cantidad de Entradas Generales: *". $this->reserva->cant_adul . "*\n";
-        $mens .= "Seguro (menores de 3 años ó CUD): *". $this->reserva->cant_esp . "*\n";
+        $mens .= "Cantidad de Entradas: *". $this->reserva->cant_adul . "*\n";
+        $mens .= "Seguro (niños entre 1 y 2 años ó CUD): *". $this->reserva->cant_esp . "*\n";
         $mens .= "----------------\n";
         if (!is_null($this->func2)) {
             $mens .= "Funciones: \n";

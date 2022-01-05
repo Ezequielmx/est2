@@ -75,8 +75,8 @@ class WppRecordTask extends Command
             $mens = "*Hola $reserva->usuario*. Hoy está el *Planetario Móvil* en ";
             $mens .= "*$reserva->lugar!!* ($reserva->direccion). Te reenviamos los datos de tu reserva para que los tengas a mano: \n";
             $mens .= "CODIGO DE RESERVA: *$reserva->codigo_res*\n";
-            $mens .= "Cantidad de Entradas Generales: *$reserva->cant_adul*\n";
-            $mens .= "Seguro (menores de 3 años ó CUD): *$reserva->cant_esp*\n";
+            $mens .= "Cantidad de Entradas: *$reserva->cant_adul*\n";
+            $mens .= "Seguro (niños entre 1 y 2 años ó CUD): *$reserva->cant_esp*\n";
             $mens .= "----------------\n";
 
             if ($reserva->func2_id != $reserva->func1_id) {

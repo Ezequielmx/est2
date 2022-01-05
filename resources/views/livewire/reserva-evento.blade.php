@@ -7,8 +7,8 @@
     <x-jet-dialog-modal wire:model="open">
 
        <x-slot name='title'>
-           <h3 style="color: #d30b1d"><b> Reserva de Entradas - {{ $evento->lugar }} </b></h3>
-           <hr style="color: #d30b1d; border-top: 4px solid;">
+           <h3 style="color: #2312b6"><b> Reserva de Entradas - {{ $evento->lugar }} </b></h3>
+           <hr style="color: #2312b6; border-top: 4px solid;">
        </x-slot>
        <x-slot name='content'>
         @php
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <br>
-            <p style="color: #e4414f; margin-bottom:0px;">Si sacás entradas para dos funciones <b>tenés  descuento!</b>
+            <p style="color: #2312b6; margin-bottom:0px;">Si sacás entradas para dos funciones <b>tenés  descuento!</b>
                 Pagás el <b>precio promocional de ${{ $evento->precio_prom }} </b>cada entrada!</p>
             <div class="row">
                 <div class="col">
@@ -59,7 +59,7 @@
                     <select class="form-control" name="funcion2" wire:model="selectedFunc2">
                         <option value="" >------------------------------</option>
                         @foreach ( $funciones as $funcion2)
-                            @if ($funcion2->func_id !=  $selectedFunc1 && ($funcion2->capacidad * (1 + $sobreventa/100)-($funcion2->cant_total) > 0))
+                            @if ($funcion2->func_id !=  $selectedFunc1 && $funcion2->id != $temaFunc1 && ($funcion2->capacidad * (1 + $sobreventa/100)-($funcion2->cant_total) > 0))
                                 <option value="{{ $funcion2->func_id }}">{{ $funcion2->titulo }} - {{ utf8_encode(strftime("%A %d de %B", strtotime($funcion2->fecha))) }} - {{ strftime("%H:%M", strtotime($funcion2->horario ))}}
                                 </option>
                             @endif
@@ -72,25 +72,25 @@
     
             <div class="row">
                 <div class="col-md-4">
-                    <b><label for="cant_adul">Entradas Generales</label></b>
+                    <b><label for="cant_adul">Cantidad de Entradas:</label></b>
                     <select class="form-control" name="cant_adul" wire:model="entr_gral">
                         @for ($i=1; $i <= $maxEntr; $i++ )
-                        <option value="{{ $i }}">{{ $i }}</option>
+                            <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
-                    <p>Mayores de 3 años - $ {{ $precio }}c/u.</p>
+                    <p>Mayores de 3 años ${{ $precio }}c/u.</p>
                 </div>
                 <div class="col-md-4">
-                    <b><label for="cant_men">Seguro:</label></b>
+                    <b><label for="cant_men">Cantidad seguros:</label></b>
                     <select class="form-control" name="cant_men" wire:model="entr_seg">
                         @for ($i=0; $i <= $maxEntr - $entr_gral; $i++ )
-                        <option value="{{ $i }}">{{ $i }}</option>
+                            <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
-                    <p>Menores de 3 años ó CUD - $ {{ $precio_seg }}c/u.</p>
+                    <p>Niños entre 1 y 2 años ó CUD ${{ $precio_seg }}c/u.</p>
                 </div>
                 <div class="col-md-4"><br>
-                    <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg * $cant_funciones) }}</b></h3></span>
+                    <span style="text-align: right"><h3>Total: <b>  {{'$ ' .  number_format(max(0, ($entr_gral * $precio * $cant_funciones + $entr_seg * $evento->precio_seg * $cant_funciones))) }}</b></h3></span>
                 </div>
             </div>
          
@@ -101,10 +101,11 @@
             <x-jet-secondary-button wire:click="$set('open', false)">
                 Cancelar
             </x-jet-secondary-button>
-
-            <x-jet-danger-button wire:click="save">
-                Reservar
-            </x-jet-secondary-button>
+            @if ($entr_gral >0 && $entr_seg>=0)
+                <x-jet-danger-button wire:click="save">
+                    Reservar
+                </x-jet-secondary-button>
+            @endif
         </x-slot>
     </x-jet-dialog-modal>
 </div>

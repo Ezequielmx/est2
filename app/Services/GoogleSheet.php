@@ -52,7 +52,7 @@ class GoogleSheet
             'valueInputOption' => 'USER_ENTERED',
         ];
 
-        $range = "A" . ($dimensions['rowCount'] + 1);
+        $range = "Hoja 1!A" . ($dimensions['rowCount'] + 1);
 
         return $this->googleSheetService
             ->spreadsheets_values

@@ -75,6 +75,8 @@
 
         @livewireScripts
 
+        @stack('js')
+
         <script>
             Livewire.on('alert', function(message){
                 Swal.fire({

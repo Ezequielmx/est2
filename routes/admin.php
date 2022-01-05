@@ -12,8 +12,6 @@ use App\Http\Controllers\Admin\UsuarioController;
 
 Route::get('', [GeneraleController::class, 'index']);
 
-
-
 Route::resource('admin', AdminController::class);
 
 Route::resource('generales', GeneraleController::class)->names('admin.generales');

@@ -19,8 +19,8 @@ class ReservaEvento extends Component
     public $tel = null;
     public $selectedFunc1 = null;
     public $selectedFunc2 = null;
+    public $temaFunc1 = null;
     public $funciones1 = null;
-    public $funciones2 = null;
     public $precio = 0;
     public $precio_seg = 0;
     public $func_id;
@@ -43,25 +43,34 @@ class ReservaEvento extends Component
         $this->sobreventa = Generale::First()->value('sobreventa');
         
         if (is_null($this->selectedFunc1)) {
-            $this->selectedFunc1 = $this->evento->temas_func()->first()->func_id;
+            $funciones = $this->evento->temas_func();
+            foreach( $funciones as $funcion)
+            {
+                if ($funcion->capacidad * (1 + $this->sobreventa/100)-($funcion->cant_total) > 0)
+                {
+                    $this->selectedFunc1 = $funcion->func_id;
+                    break;
+                }
+            } 
         }
+        
 
         $func1 = $this->evento->temas_func()->where('func_id','=', $this->selectedFunc1)->first();
+        $this->temaFunc1 = $func1->id;
         $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
-        $this->maxEntr = min(10, $disp_func1);
+        $this->maxEntr = max(0 , min(10, $disp_func1));
         
     }
 
     public function updatedselectedFunc1($func1_id)
     {
-        $this->funciones2 = $this->evento->temas_func()->where('func_id','!=',$func1_id);
-
         $func1 = $this->evento->temas_func()->where('func_id','=', $func1_id)->first();
+        $this->temaFunc1 = $func1->id;
         $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
-        $this->maxEntr = min(10, $disp_func1);
-        $this->entr_gral = min($this->entr_gral, $this->maxEntr);
+        $this->maxEntr = max(0 , min(10, $disp_func1));
+        $this->entr_gral = max(0 , min($this->entr_gral, $this->maxEntr));
 
         $this->selectedFunc2 = null;
         $this->precio = $this->evento->precio;
@@ -79,8 +88,8 @@ class ReservaEvento extends Component
             $func2 = $this->evento->temas_func()->where('func_id','=', $func2_id)->first();
             $disp_func2= $func2->capacidad * (1 + $this->sobreventa/100)-($func2->cant_total);
     
-            $this->maxEntr = min($this->maxEntr, $disp_func2);
-            $this->entr_gral = min($this->entr_gral, $this->maxEntr);
+            $this->maxEntr = max(0 ,min($this->maxEntr, $disp_func2));
+            $this->entr_gral = max(0 ,min($this->entr_gral, $this->maxEntr));
             $this->precio = $this->evento->precio_prom;
             $this->cant_funciones=2;
         }
@@ -89,7 +98,7 @@ class ReservaEvento extends Component
     public function updated()
     {
         if ( ($this->entr_gral + $this->entr_seg) > $this->maxEntr) {
-            $this->entr_seg = $this->maxEntr - $this->entr_gral;
+            $this->entr_seg = max(0 ,$this->maxEntr - $this->entr_gral);
         }
     }
 
@@ -144,7 +153,8 @@ class ReservaEvento extends Component
     public function render()
     {
         return view('livewire.reserva-evento', [
-            'funciones' => $this->evento->temas_func()
+            'funciones' => $this->evento->temas_func(),
+            'temaFunc1'=> $this->temaFunc1
         ]);
     }
 

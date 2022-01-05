@@ -3,7 +3,13 @@
 @section('title','Estrella del Plata')
 
 @section('content')
-    @livewire('admin.showres', ['funcione' => $funcione])
+
+
+    <h1 style="padding:7px"><i class="fas fa-search"></i>&nbsp;&nbsp;Reservas</h1>
+    <div class="card">
+        @livewire('admin.reservas')
+    </div>
+
 @stop
 
 @section('css')
@@ -12,7 +18,7 @@
 
 @section('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-               
+                
     <script>
         Livewire.on('deleteReserv', reservId =>{
             Swal.fire({
@@ -37,4 +43,7 @@
         });
         
     </script>
+ 
 @stop
+
+
