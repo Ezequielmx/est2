@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Reserva;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\DeleteRowsSheet;
 
 class Reservas extends Component
 {
@@ -47,5 +48,6 @@ class Reservas extends Component
 
     public function deleteRes(Reserva $reserva){
         $reserva->delete();
+        DeleteRowsSheet::dispatch($reserva->id);
     }
 }

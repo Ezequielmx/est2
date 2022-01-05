@@ -76,10 +76,6 @@ class SaveResSheet
 
         ReservaSheet::dispatch($values);
 
-        /*
-        $sheet = new GoogleSheet;
-
-        $sheet->saveDataToSheet($values);*/
     }
 
     public function wppConf()

@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\GoogleSheet;
 
-class ReservaSheet implements ShouldQueue
+class DeleteRowsSheet implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -29,8 +29,23 @@ class ReservaSheet implements ShouldQueue
     public function handle()
     {
         $sheet = new GoogleSheet;
+        
+        $form1 = "=COINCIDIR($this->values;G:G;0)-1";
+        $arr = [];
+        $arr2 =[];
+        array_push($arr, $form1);
+        array_push($arr2, $arr);
 
-        $res = $sheet->saveDataToSheet($this->values);
-        print_r($res);
+        $startIndex = $sheet->saveinCell($arr2, 'Hoja 1!Z1');
+
+        $form2= "=CONTAR.SI(G:G;$this->values)";
+        $arr = [];
+        $arr2 =[];
+        array_push($arr, $form2);
+        array_push($arr2, $arr);
+
+        $endIndex = $startIndex + $sheet->saveinCell($arr2, 'Hoja 1!Z1');
+
+        $sheet->deleteRows($startIndex, $endIndex);
     }
 }

@@ -6,6 +6,8 @@ namespace App\Services;
 use Google_Client;
 use Google_Service_Sheets;
 use Google_Service_Sheets_ValueRange;
+use Google_Service_Sheets_Request;
+use Google_Service_Sheets_BatchUpdateSpreadsheetRequest;
 
 class GoogleSheet
 {
@@ -109,5 +111,49 @@ class GoogleSheet
             $number = ($number - $temp - 1) / 26;
         }
         return $letter;
+    }
+
+    public function saveinCell(array $data, String $range)
+    {
+    
+        $body = new Google_Service_Sheets_ValueRange([
+            'values' => $data
+        ]);
+
+        $params = [
+            'valueInputOption' => 'USER_ENTERED',
+            'includeValuesInResponse' => 'TRUE',
+            'responseValueRenderOption' => 'UNFORMATTED_VALUE',
+            'fields' => 'updatedData'
+        ];
+
+
+        return $this->googleSheetService
+            ->spreadsheets_values
+            ->update($this->spreadSheetId, $range, $body, $params)->updatedData->values[0][0];
+    }
+
+
+    public function deleteRows(int $startIndex, int $endIndex){
+        $requests = [
+            // Change the spreadsheet's title.
+            new Google_Service_Sheets_Request([
+                'deleteDimension' => [
+                    'range' => [
+                        'sheetId' => '0',
+                        'dimension' => 'ROWS',
+                        'startIndex' => $startIndex,
+                        'endIndex' => $endIndex
+                    ]
+                ]
+            ])
+          ];
+
+        
+        $batchUpdateRequest = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
+            'requests' => $requests
+        ]);
+        
+        return $this->googleSheetService->spreadsheets->batchUpdate($this->spreadSheetId, $batchUpdateRequest);
     }
 }
