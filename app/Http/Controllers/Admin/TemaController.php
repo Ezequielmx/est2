@@ -118,7 +118,6 @@ class TemaController extends Controller
     
     public function destroy(Tema $tema)
     {
-        return $tema;
         $tema->delete();
 
         return redirect()->route('admin.temas.index')->with('info', 'El tema se eliminó con éxito');

@@ -46,6 +46,7 @@
         foreach($evento->temas_func() as $funcion)
         {
             $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total);
+            $disp = round($disp, 0, PHP_ROUND_HALF_DOWN);
             if($disp > 0)
             {
                 $entdisp=true;
@@ -104,7 +105,8 @@
                         
                     @endif
                     @php
-                        $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total)
+                        $disp = ($funcion->capacidad * (1 + $sobreventa/100))-($funcion->cant_total);
+                        $disp = round($disp, 0, PHP_ROUND_HALF_DOWN);
                     @endphp
 
                     <hr>
