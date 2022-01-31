@@ -7,6 +7,7 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
+use Illuminate\Support\Facades\DB;
 
 class ReservaEvento extends Component
 {
@@ -107,47 +108,66 @@ class ReservaEvento extends Component
     {
         $this->validate();
 
-        setlocale(LC_TIME, "spanish");
-        
-        $reserva = new Reserva();
+        $resAnt = DB::table('reservas')
+                    ->join('funcione_reserva', 'reservas.id', '=', 'funcione_reserva.reserva_id')
+                    ->join('funciones', 'funcione_reserva.funcione_id', '=', 'funciones.id')
+                    ->select('reservas.id')
+                    ->where('reservas.telefono','=',$this->tel)
+                    ->where('funciones.evento_id','=',$this->evento->id)
+                    ->get()
+                    ->count();
 
-        $reserva->codigo_res="123";
-        $reserva->importe=$this->entr_gral * $this->precio * $this->cant_funciones + $this->entr_seg * $this->precio_seg * $this->cant_funciones;
-        $reserva->usuario = $this->usuario;
-        $reserva->telefono = $this->tel;
-        $reserva->cant_adul = $this->entr_gral;
-        $reserva->cant_esp = $this->entr_seg;
-        $reserva->wppconf = '0';
-        $reserva->wpprecord = '0';
+        if ($resAnt > 0)
+        {
+            $mensaje = "<b>Ya existe una reserva registrada con el numero $this->tel</b>. 
+                        <br>Ante cualquier duda o modificacion de tu reserva comunicate con 
+                        nosotros por <a href='https://api.whatsapp.com/send?phone=+5491141462850' target='_blank'>Whatsapp</a>";
+                        
 
-        $reserva->save();
-        $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
-        $reserva->save();
-
-        $reserva->funciones()->attach($this->selectedFunc1);
-
-        if (!is_null($this->selectedFunc2)) {
-            $reserva->funciones()->attach($this->selectedFunc2);
+            $this->emit('alert', $mensaje, 'Uups...', 'error');
+    
+            $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
         }
+        else
+        {
+            setlocale(LC_TIME, "spanish");
+            
+            $reserva = new Reserva();
 
-        $mensaje = 'Tu reseva ya está registrada.<br> Código de reserva: <b>' . str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT) . 
-        '</b><br>Recibirás todos los detalles por WhatsApp. <br> <b>Te esperamos!</b>'; 
+            $reserva->codigo_res="123";
+            $reserva->importe=$this->entr_gral * $this->precio * $this->cant_funciones + $this->entr_seg * $this->precio_seg * $this->cant_funciones;
+            $reserva->usuario = $this->usuario;
+            $reserva->telefono = $this->tel;
+            $reserva->cant_adul = $this->entr_gral;
+            $reserva->cant_esp = $this->entr_seg;
+            $reserva->wppconf = '0';
+            $reserva->wpprecord = '0';
 
-        $this->emit('alert', $mensaje);
+            $reserva->save();
+            $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
+            $reserva->save();
 
-        $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
+            $reserva->funciones()->attach($this->selectedFunc1);
 
+            if (!is_null($this->selectedFunc2)) {
+                $reserva->funciones()->attach($this->selectedFunc2);
+            }
 
-        $resSheet = new SaveResSheet($reserva, $this->evento, $this->selectedFunc1, $this->selectedFunc2);
-       
+            $mensaje = 'Tu reseva ya está registrada.<br> Código de reserva: <b>' . str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT) . 
+            '</b><br>Recibirás todos los detalles por WhatsApp. <br> <b>Te esperamos!</b>'; 
+
+            $this->emit('alert', $mensaje, 'Listo!!', 'success');
+
+            $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
+
+    
+            $resSheet = new SaveResSheet($reserva, $this->evento, $this->selectedFunc1, $this->selectedFunc2);
         
-        $resSheet->save();
+            
+            $resSheet->save();
 
-        $resSheet->wppConf();
-
-        
-
-        
+            $resSheet->wppConf();
+        }
     }
 
     public function render()

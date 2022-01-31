@@ -78,14 +78,26 @@
         @stack('js')
 
         <script>
-            Livewire.on('alert', function(message){
+            Livewire.on('alert', function(message, titulo, icono){
+                Swal.fire({
+                    title: 
+                        titulo,
+                    icon: 
+                        icono,
+                    html: 
+                        message,
+                })
+            })
+
+            /*
+                        Livewire.on('alert', function(message){
                 Swal.fire({
                     title: 'Listo!!',
                     icon: 'success',
                     html: 
                         message,
                 })
-            })
+            })*/
         </script>
     </body>
 </html>
