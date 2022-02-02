@@ -12,6 +12,7 @@ class ReservaChart extends Component
 
     public $eventoSel;
     public $fechaSel;
+    public $resTotal;
 
     public function render()
     {   
@@ -86,13 +87,16 @@ class ReservaChart extends Component
                     funciones.fecha, 
                     funciones.horario,
                     funciones.id");
+
         $categorias = array();
         $dataRes = array();
         $dataLib = array();
+        $this->resTotal=0;
         foreach($dat as $funcion){
             array_push($categorias, $funcion->titulo . " - " . utf8_encode(strftime("%A %d de %B", strtotime($funcion->fecha)))  . " - " . strftime("%H:%M", strtotime($funcion->horario)));
             array_push($dataRes, $funcion->reservas);
             array_push($dataLib, $funcion->disponible);
+            $this->resTotal += $funcion->reservas;
         }
 
         

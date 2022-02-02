@@ -22,6 +22,10 @@
                         @endforeach
                     </select>
                     
+                </div>
+                <div class="col">
+                    <br>
+                    <span style="text-align: center"><h3>Total Reservas: <b>  {{ $resTotal }}</b></h3></span>
                 </div>   
             </div>
         </form>
