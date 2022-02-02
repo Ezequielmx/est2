@@ -26,15 +26,6 @@
                     mens,
             })
         })
-        /*
-        Livewire.on('alert', function(message){
-            Swal.fire({
-                title: 'Listo!!',
-                icon: 'success',
-                html: 
-                    message,
-            })
-        })*/
     </script>
 
 @stop

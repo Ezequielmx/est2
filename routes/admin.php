@@ -25,3 +25,4 @@ Route::resource('funciones', FuncionController::class)->names('admin.funciones')
 Route::resource('reservas', ReservaController::class)->names('admin.reservas');
 
 Route::resource('usuarios', UsuarioController::class)->names('admin.usuarios');
+

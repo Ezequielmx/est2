@@ -86,18 +86,26 @@
                         icono,
                     html: 
                         message,
-                })
             })
+        });
 
-            /*
-                        Livewire.on('alert', function(message){
-                Swal.fire({
-                    title: 'Listo!!',
-                    icon: 'success',
-                    html: 
-                        message,
-                })
-            })*/
+        Livewire.on('confirmRes', function(mens, importe, usuario ,telefono, cant_adul, cant_esp, selectedFunc1, selectedFunc2, evento_id){
+            Swal.fire({
+                title: 'Revisá si está todo bien antes de Reservar:',
+                html: mens,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Si. Reservar',
+                cancelButtonText: 'No. Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('saveResU', importe, usuario ,telefono, cant_adul, cant_esp, selectedFunc1, selectedFunc2, evento_id);
+                }
+            })  
+        });
+
         </script>
     </body>
 </html>

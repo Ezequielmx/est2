@@ -74,7 +74,7 @@ class SaveResSheet
         }
 
 
-        ReservaSheet::dispatch($values);
+       // ReservaSheet::dispatch($values);
 
     }
 
