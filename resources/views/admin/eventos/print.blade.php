@@ -111,7 +111,6 @@
                 <tr>
                     <th>Codigo</th>
                     <th>Usuario</th>
-                    <th>Telefono</th>
                     <th>Adultos</th>
                     <th>Niños/CUD</th>
                 </tr>
@@ -125,7 +124,6 @@
                 <tr>
                     <td> {{ $reserva->codigo_res }}</td>
                     <td> {{ $reserva->usuario }}</td>
-                    <td> {{ $reserva->telefono }}</td>
                     <td> {{ $reserva->cant_adul }}</td>
                     <td> {{ $reserva->cant_esp }}</td>
                 </tr>    

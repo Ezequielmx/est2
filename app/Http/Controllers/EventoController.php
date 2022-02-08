@@ -41,7 +41,5 @@ class EventoController extends Controller
         $pdf = PDF::loadView('admin.eventos.print', compact('reservas'));
         return $pdf->stream('reservas.pdf');
 
-        return view('admin.eventos.print', compact('reservas'));
-
     }
 }

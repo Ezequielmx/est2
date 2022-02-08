@@ -49,6 +49,6 @@ class Reservas extends Component
 
     public function deleteRes(Reserva $reserva){
         $reserva->delete();
-        DeleteRowsSheet::dispatch($reserva->id);
+        //DeleteRowsSheet::dispatch($reserva->id);
     }
 }

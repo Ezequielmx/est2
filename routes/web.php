@@ -29,11 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin/nuevareserva', func
     return view('admin.nuevareserva.index');
 })->name('nuevareserva');
 
-/*
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/ocupacion', function () {
-    return view('admin.ocupacion.index');
-})->name('ocupacion');*/
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin/ocupacion', [Ocupacion::class, 'index'])
 ->name('ocupacion');
 

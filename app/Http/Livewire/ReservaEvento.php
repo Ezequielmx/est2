@@ -53,7 +53,7 @@ class ReservaEvento extends Component
             $funciones = $this->evento->temas_func();
             foreach( $funciones as $funcion)
             {
-                if ($funcion->capacidad * (1 + $this->sobreventa/100)-($funcion->cant_total) > 0)
+                if (round($funcion->capacidad * (1 + $this->sobreventa/100)-($funcion->cant_total), 0, PHP_ROUND_HALF_DOWN) > 0)
                 {
                     $this->selectedFunc1 = $funcion->func_id;
                     break;
@@ -63,7 +63,7 @@ class ReservaEvento extends Component
 
         $func1 = $this->evento->temas_func()->where('func_id','=', $this->selectedFunc1)->first();
         $this->temaFunc1 = $func1->id;
-        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
+        $disp_func1 = round($func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total), 0, PHP_ROUND_HALF_DOWN);
 
         $this->maxEntr = max(0 , min(10, $disp_func1));
         
@@ -73,7 +73,7 @@ class ReservaEvento extends Component
     {
         $func1 = $this->evento->temas_func()->where('func_id','=', $func1_id)->first();
         $this->temaFunc1 = $func1->id;
-        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
+        $disp_func1 = round($func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total), 0, PHP_ROUND_HALF_DOWN);
 
         $this->maxEntr = max(0 , min(10, $disp_func1));
         $this->entr_gral = max(0 , min($this->entr_gral, $this->maxEntr));
@@ -92,7 +92,7 @@ class ReservaEvento extends Component
         }
         else{
             $func2 = $this->evento->temas_func()->where('func_id','=', $func2_id)->first();
-            $disp_func2= $func2->capacidad * (1 + $this->sobreventa/100)-($func2->cant_total);
+            $disp_func2= round($func2->capacidad * (1 + $this->sobreventa/100)-($func2->cant_total), 0, PHP_ROUND_HALF_DOWN);
     
             $this->maxEntr = max(0 ,min($this->maxEntr, $disp_func2));
             $this->entr_gral = max(0 ,min($this->entr_gral, $this->maxEntr));
