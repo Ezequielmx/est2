@@ -9,9 +9,9 @@
                         <b><label for="evento">Seleccione el Evento</label></b>
                         <select class="form-control" name="evento" wire:model="eventoSel">
                             @foreach ($eventos as $evento)
-                                @if ($evento->activo == 1 )
+                    
                                     <option value="{{ $evento->id }}">{{ $evento->lugar }} </option>    
-                                @endif
+                         
                                 
                             @endforeach
                         </select>
