@@ -47,10 +47,11 @@
             </script>
     </head>
     <body class="font-sans antialiased">
+        {{--  
         <a href="https://api.whatsapp.com/send?phone=+5491141462850" class="btn-wsp" target="_blank">
             <i class="fa fa-whatsapp icono"></i>
         </a>
-        
+        --}}
         <x-jet-banner />
 
         <div class="min-h-screen">
