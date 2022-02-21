@@ -6,12 +6,11 @@
                     <th>Id</th>
                     <th>Lugar</th>
                     <th>Direccion</th>
-                    <th>Ubicacion</th>
                     <th>Precio</th>
                     <th>Precio Promo</th>
                     <th>Precio Seguro</th>
                     <th>Activo</th>
-                    <th colspan="3"></th>
+                    <th colspan="4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +19,6 @@
                         <td>{{ $evento->id }}</td>
                         <td>{{ $evento->lugar }}</td>
                         <td>{{ $evento->direccion }}</td>
-                        <td>{{ $evento->ubicacion }}</td>
                         <td>$ {{ $evento->precio }}</td>
                         <td>$ {{ $evento->precio_prom }}</td>
                         <td>$ {{ $evento->precio_seg }}</td>
@@ -41,6 +39,9 @@
                         </td>
                         <td width="10px">
                             <a wire:click="$emit('deleteEvent', {{ $evento->id }})" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" href="{{ route('eventoprint', $evento) }}" target="_blank">Imprimir Reservas</a>
                         </td>
                     </tr>    
                 @endforeach

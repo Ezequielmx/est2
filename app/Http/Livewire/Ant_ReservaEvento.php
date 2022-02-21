@@ -7,11 +7,7 @@ use App\Models\Evento;
 use App\Models\Reserva;
 use App\Services\SaveResSheet;
 use App\Models\Generale;
-use Illuminate\Queue\Listener;
 use Illuminate\Support\Facades\DB;
-use App\Models\Funcione;
-use App\Models\Tema;
-
 
 class ReservaEvento extends Component
 {
@@ -33,8 +29,6 @@ class ReservaEvento extends Component
     public $maxEntr;
     public $cant_funciones=1;
 
-    protected $listeners = ['resetP'];
-
     protected $rules = [
         'usuario' => 'required|min:3',
         'tel' => 'required|digits:10'
@@ -53,17 +47,18 @@ class ReservaEvento extends Component
             $funciones = $this->evento->temas_func();
             foreach( $funciones as $funcion)
             {
-                if (round($funcion->capacidad * (1 + $this->sobreventa/100)-($funcion->cant_total), 0, PHP_ROUND_HALF_DOWN) > 0)
+                if ($funcion->capacidad * (1 + $this->sobreventa/100)-($funcion->cant_total) > 0)
                 {
                     $this->selectedFunc1 = $funcion->func_id;
                     break;
                 }
             } 
         }
+        
 
         $func1 = $this->evento->temas_func()->where('func_id','=', $this->selectedFunc1)->first();
         $this->temaFunc1 = $func1->id;
-        $disp_func1 = round($func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total), 0, PHP_ROUND_HALF_DOWN);
+        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
         $this->maxEntr = max(0 , min(10, $disp_func1));
         
@@ -73,7 +68,7 @@ class ReservaEvento extends Component
     {
         $func1 = $this->evento->temas_func()->where('func_id','=', $func1_id)->first();
         $this->temaFunc1 = $func1->id;
-        $disp_func1 = round($func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total), 0, PHP_ROUND_HALF_DOWN);
+        $disp_func1 = $func1->capacidad * (1 + $this->sobreventa/100)-($func1->cant_total);
 
         $this->maxEntr = max(0 , min(10, $disp_func1));
         $this->entr_gral = max(0 , min($this->entr_gral, $this->maxEntr));
@@ -92,7 +87,7 @@ class ReservaEvento extends Component
         }
         else{
             $func2 = $this->evento->temas_func()->where('func_id','=', $func2_id)->first();
-            $disp_func2= round($func2->capacidad * (1 + $this->sobreventa/100)-($func2->cant_total), 0, PHP_ROUND_HALF_DOWN);
+            $disp_func2= $func2->capacidad * (1 + $this->sobreventa/100)-($func2->cant_total);
     
             $this->maxEntr = max(0 ,min($this->maxEntr, $disp_func2));
             $this->entr_gral = max(0 ,min($this->entr_gral, $this->maxEntr));
@@ -136,39 +131,42 @@ class ReservaEvento extends Component
         else
         {
             setlocale(LC_TIME, "spanish");
+            
+            $reserva = new Reserva();
 
-            $importe=$this->entr_gral * $this->precio * $this->cant_funciones + $this->entr_seg * $this->precio_seg * $this->cant_funciones;
-            $usuario = $this->usuario;
-            $telefono = $this->tel;
-            $cant_adul = $this->entr_gral;
-            $cant_esp = $this->entr_seg;
+            $reserva->codigo_res="123";
+            $reserva->importe=$this->entr_gral * $this->precio * $this->cant_funciones + $this->entr_seg * $this->precio_seg * $this->cant_funciones;
+            $reserva->usuario = $this->usuario;
+            $reserva->telefono = $this->tel;
+            $reserva->cant_adul = $this->entr_gral;
+            $reserva->cant_esp = $this->entr_seg;
+            $reserva->wppconf = '0';
+            $reserva->wpprecord = '0';
 
-            $mens = "&#x1F4F1 Celular: <b>" . $telefono . "</b> <br>
-                    &#x1F9D1 Nombre: <b>" . $usuario . "</b> <br>
-                    &#x1F39F Entradas Adultos: <b>" . $cant_adul . "</b> <br>
-                    &#x1F39F Entradas Niños/CUD : <b>" . $cant_esp . "</b> <br>
-                    &#x1F4B5 Importe : <b>$ " . number_format($importe) . "</b> <br>
-                    ";
+            $reserva->save();
+            $reserva->codigo_res=str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT);
+            $reserva->save();
 
-            $func1 = Funcione::find($this->selectedFunc1);
-            $tema1 = Tema::find($func1->tema_id);
+            $reserva->funciones()->attach($this->selectedFunc1);
 
             if (!is_null($this->selectedFunc2)) {
-
-                $func2 = Funcione::find($this->selectedFunc2);
-                $tema2 = Tema::find($func2->tema_id);
-
-                $mens .= "Funciones: <br>";
-                $mens .= "<b>&#x1F4E3 $tema1->titulo - " . utf8_encode(strftime("%A %d de %B", strtotime($func1->fecha))). " " . strftime("%H:%M", strtotime($func1->horario)) . " hs. <br>";
-                $mens .= "&#x1F4E3 $tema2->titulo - " . utf8_encode(strftime("%A %d de %B", strtotime($func2->fecha))). " " . strftime("%H:%M", strtotime($func2->horario)) . " hs. </b>";
+                $reserva->funciones()->attach($this->selectedFunc2);
             }
-            else
-            {
-                $mens .= "Funcion: <br>";
-                $mens .= "<b>&#x1F4E3 $tema1->titulo  - " . utf8_encode(strftime("%A %d de %B", strtotime($func1->fecha))). " a las " . strftime("%H:%M", strtotime($func1->horario)) . " hs. </b>";
-            }
-            $this->emit('confirmRes', $mens, $importe, $usuario ,$telefono, $cant_adul, $cant_esp, $this->selectedFunc1, $this->selectedFunc2, $this->evento->id);
 
+            $mensaje = 'Tu reseva ya está registrada.<br> Código de reserva: <b>' . str_pad($reserva->id, 4 ,"0", STR_PAD_LEFT) . 
+            '</b><br>Recibirás todos los detalles por WhatsApp. <br> <b>Te esperamos!</b>'; 
+
+            $this->emit('alert', $mensaje, 'Listo!!', 'success');
+
+            $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
+
+            /*
+            $resSheet = new SaveResSheet($reserva, $this->evento, $this->selectedFunc1, $this->selectedFunc2);
+        
+            
+            $resSheet->save();
+
+            $resSheet->wppConf();*/
         }
     }
 
@@ -180,9 +178,5 @@ class ReservaEvento extends Component
         ]);
     }
 
-    public function resetP()
-    {
-        $this->reset(['open', 'usuario', 'tel', 'maxEntr']);
-    }
-
+    
 }

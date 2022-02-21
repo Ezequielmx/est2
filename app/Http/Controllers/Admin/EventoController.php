@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Generale;
 use App\Models\Tema;
 
+
 use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
@@ -165,4 +166,6 @@ class EventoController extends Controller
         $evento->delete();
         return redirect()->route('admin.eventos.index')->with('info', 'El Evento se eliminó con éxito');
     }
+
+
 }

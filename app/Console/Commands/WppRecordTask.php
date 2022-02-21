@@ -89,11 +89,12 @@ class WppRecordTask extends Command
                 $mens .= "Funcion: \n";
                 $mens .= "* *" . $reserva->f1_titulo. " - " . utf8_encode(strftime("%A %d de %B", strtotime($reserva->f1_fecha))). " a las " . strftime("%H:%M", strtotime($reserva->f1_horario)) . " hs.*\n";
             }
+            $mens .= "-Duración de cada función: *35minutos*-\n";
             $mens .= "----------------\n";
             $mens .= "Importe Total: *$". $reserva->importe . "*\n";
             $mens .= "----------------\n";
             $mens .= "*". "¿Cómo y cuándo se retiran las entradas?" . "*\n";
-            $mens .= "Tenés que estar 30 min antes para asegurar tu lugar y abonar la entrada en el lugar del evento\n\n";
+            $mens .= "Tenés que estar 30 min antes para asegurar tu lugar y abonar la entrada en el lugar del evento. *Si no llegás las entradas pasan a disponibilidad*\n\n";
             $mens .= "*Medios de pago? | Solo en efectivo*\n\n";
             $mens .= "Por favor sino vas al evento, avísanos, así la reserva se la damos a otra persona que si quiera ir!\n\nLa reserva de entradas es *un compromiso de asistencia  al evento*. Pedimos por favor, que no nos fallen. *Gracias!*";
 

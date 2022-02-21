@@ -41,6 +41,7 @@ class Reservas extends Component
         ->where('reservas.id','like','%' . $this->searchCod . '%')
         ->orderByDesc('eventos.activo')
         ->orderBy('reservas.id')
+        ->limit(30)
         ->get();
 
         return view('livewire.admin.reservas', compact('reservt'));
@@ -48,6 +49,6 @@ class Reservas extends Component
 
     public function deleteRes(Reserva $reserva){
         $reserva->delete();
-        DeleteRowsSheet::dispatch($reserva->id);
+        //DeleteRowsSheet::dispatch($reserva->id);
     }
 }

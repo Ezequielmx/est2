@@ -67,7 +67,7 @@
             
             @if ($entdisp)
                 <div class="cont-btn">
-                    @livewire('reserva-evento', ['evento'=>$evento])  
+                    @livewire('reserva-evento', ['evento'=>$evento], key('-1'))  
                 </div>
             @endif
             
@@ -119,7 +119,7 @@
                         </div>
                         <div class="btnres">
                             @if ($disp > 0)
-                                @livewire('reserva-evento', ['evento'=>$evento, 'func_id'=>$funcion->func_id])
+                                @livewire('reserva-evento', ['evento'=>$evento, 'func_id'=>$funcion->func_id], key($funcion->func_id))
                             @else
                                 Entradas agotadas 
                             @endif
@@ -129,6 +129,8 @@
             @endforeach
         </div>
 @endif
+
+        @livewire('save-res');
     </div>
 
 </x-app-layout>

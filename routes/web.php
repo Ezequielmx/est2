@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Ocupacion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
 use App\Http\Livewire\ShowEventos;
@@ -27,6 +28,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin/mensajes', function
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin/nuevareserva', function () {
     return view('admin.nuevareserva.index');
 })->name('nuevareserva');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/ocupacion', [Ocupacion::class, 'index'])
+->name('ocupacion');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/eventoprint/{id_event}', [EventoController::class, 'print'])
+->name('eventoprint');
+
+
+Route::get('users/report', 'UsersController@report');
 
 
 Route::get('/', ShowEventos::class)->name('home');

@@ -47,10 +47,11 @@
             </script>
     </head>
     <body class="font-sans antialiased">
+        {{--  
         <a href="https://api.whatsapp.com/send?phone=+5491141462850" class="btn-wsp" target="_blank">
             <i class="fa fa-whatsapp icono"></i>
         </a>
-        
+        --}}
         <x-jet-banner />
 
         <div class="min-h-screen">
@@ -78,14 +79,34 @@
         @stack('js')
 
         <script>
-            Livewire.on('alert', function(message){
+            Livewire.on('alert', function(message, titulo, icono){
                 Swal.fire({
-                    title: 'Listo!!',
-                    icon: 'success',
+                    title: 
+                        titulo,
+                    icon: 
+                        icono,
                     html: 
                         message,
-                })
             })
+        });
+
+        Livewire.on('confirmRes', function(mens, importe, usuario ,telefono, cant_adul, cant_esp, selectedFunc1, selectedFunc2, evento_id){
+            Swal.fire({
+                title: 'Revisá si está todo bien antes de Reservar:',
+                html: mens,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Si. Reservar',
+                cancelButtonText: 'No. Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('saveResU', importe, usuario ,telefono, cant_adul, cant_esp, selectedFunc1, selectedFunc2, evento_id);
+                }
+            })  
+        });
+
         </script>
     </body>
 </html>

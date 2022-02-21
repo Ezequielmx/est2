@@ -69,8 +69,9 @@
         
         @yield('content')
     </div>
+    {{--  
     <a href="https://api.whatsapp.com/send?phone=+5491141462850" class="btn-wsp" target="_blank">
 	    <i class="fa fa-whatsapp icono"></i>
-	</a>
+	</a> --}}
 </body>
 </html>

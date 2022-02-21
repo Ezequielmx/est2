@@ -289,6 +289,13 @@ return [
             'icon'        => 'fab fa-whatsapp',
             'active'      =>  ['admin/mensajes*'],     
         ],
+
+        [
+            'text'        => 'Ocupación',
+            'url'         => 'admin/ocupacion',
+            'icon'        => 'fas fa-chart-bar',
+            'active'      =>  ['admin/ocupacion*'],     
+        ],
                 
         ['header' => 'ADMINISTRADOR'],
         
